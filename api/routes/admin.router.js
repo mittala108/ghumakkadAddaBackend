@@ -1,0 +1,64 @@
+const AdminBro=require('admin-bro');
+const expressAdminBro=require('admin-bro-expressjs');
+const mongooseAdminBro=require('admin-bro-mongoose');
+
+//models registeration
+const backpacking_trip_state=require('../models/Backpacking_Trip/backpacking_trip_state');
+const backpacking_trip_common_city=require('../models/Backpacking_Trip/backpacking_trip_common_city');
+const backpacking_trip_package=require('../models/Backpacking_Trip/backpacking_trip_package');
+const backpacking_trip_package_date=require('../models/Backpacking_Trip/backpacking_trip_package_date');
+const backpacking_trip_tour_guide_info=require('../models/Backpacking_Trip/backpacking_trip_tour_guide_info');
+const backpacking_trip_total_booking_on_a_particular_date=require('../models/Backpacking_Trip/backpacking_trip_total_booking_on_a_particular_date');
+const backpacking_trip_user_booking_detail=require('../models/Backpacking_Trip/backpacking_trip_user_booking_detail');
+
+const bike_trip_common_city=require('../models/Bike_Trip/bike_trip_common_city');
+const bike_trip_package=require('../models/Bike_Trip/bike_trip_package');
+const bike_trip_package_date=require('../models/Bike_Trip/bike_trip_package_date');
+const bike_trip_tour_guide_info=require('../models/Bike_Trip/bike_trip_tour_guide_info');
+const bike_trip_total_booking_on_a_particular_date=require('../models/Bike_Trip/bike_trip_total_booking_on_a_particular_date');
+const bike_trip_user_booking_detail=require('../models/Bike_Trip/bike_trip_user_booking_detail');
+
+const weekend_trip_common_city=require('../models/Weekend_Trip/weekend_trip_common_city');
+const weekend_trip_package=require('../models/Weekend_Trip/weekend_trip_package');
+const weekend_trip_package_date=require('../models/Weekend_Trip/weekend_trip_package_date');
+const weekend_trip_tour_guide_info=require('../models/Weekend_Trip/weekend_trip_tour_guide_info');
+const weekend_trip_total_booking_on_a_particular_date=require('../models/Weekend_Trip/weekend_trip_total_booking_on_a_particular_date');
+const weekend_trip_user_booking_detail=require('../models/Weekend_Trip/weekend_trip_user_booking_detail');
+
+const user=require('../models/user_models/user');
+const payments=require('../models/payments_related_models/payment');
+
+AdminBro.registerAdapter(mongooseAdminBro)
+
+const AdminBroOptions={
+    
+    resources:[
+        user,
+        payments,
+        backpacking_trip_state,
+        backpacking_trip_common_city,
+        backpacking_trip_package,
+        backpacking_trip_package_date,
+        backpacking_trip_tour_guide_info,
+        backpacking_trip_total_booking_on_a_particular_date,
+        backpacking_trip_user_booking_detail,
+        bike_trip_common_city,
+        bike_trip_package,
+        bike_trip_package_date,
+        bike_trip_tour_guide_info,
+        bike_trip_total_booking_on_a_particular_date,
+        bike_trip_user_booking_detail,
+        weekend_trip_common_city,
+        weekend_trip_package,
+        weekend_trip_package_date,
+        weekend_trip_tour_guide_info,
+        weekend_trip_total_booking_on_a_particular_date,
+        weekend_trip_user_booking_detail
+    ]
+}
+
+const adminBro=new AdminBro(AdminBroOptions);
+const router=expressAdminBro.buildRouter(adminBro)
+
+
+module.exports=router
