@@ -6,9 +6,7 @@ const mongoose=require('mongoose');
 const cors=require('cors');
 const sub_routes=require('./api/routes/sub_routes');
 const adminRouter=require('./api/routes/admin.router');
-const cron=require('node-cron');
-const scheduler=require('node-schedule');
-
+require('dotenv').config();
 
 app.set('view engine','ejs');
 
@@ -31,22 +29,6 @@ app.get('/uploads/:filename',(req,res)=>{
      return res.sendFile(__dirname+'/uploads/'+req.params.filename);
 });
 
-app.get('/experiment1',(req,res)=>{
-
-    res.json({
-        message:'new data'
-    });
-
-    const date1 = new Date(2022, 11, 20, 21, 01, 00).toLocaleString(undefined,{timeZone:'Asia/Kolkata'});
-    scheduler.scheduleJob('job1',date1,()=>{
-        console.log('heelkk');
-        scheduler.cancelJob('job1');
-    });
-
-    console.log("hello");
-
-    
-});
 
 app.use('/admin/sub_routes',sub_routes);
 app.use('/admin',adminRouter);

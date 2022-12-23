@@ -36,6 +36,11 @@ const payments=require('./payment_related_routes/payments');
 const users=require('./user_related_routes/users');
 
 
+//Email_verification
+
+const email_verification=require('./email_verification_routes/email_verification');
+
+
 
 
 
@@ -74,5 +79,8 @@ router.use('/payment_related_routes/payments',payments);
 
 //User_related_routes
 router.use('/user_related_routes/users',users);
+
+//Email_verification_routes
+router.use('/email_verification_related_routes/email_verification',email_verification);
 
 module.exports=router;
