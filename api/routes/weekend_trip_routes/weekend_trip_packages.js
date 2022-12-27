@@ -36,15 +36,15 @@ router.get('/get_weekend_trip_packages',(req,res)=>{
 });
 
 
-router.post('/post_weekend_trip_package',upload.fields([{name:'front_image_path',maxCount:1},{name:'package_details_url_path',maxCount:1}]),(req,res)=>{
+router.post('/post_weekend_trip_package',upload.fields([{name:'front_image_path',maxCount:1},{name:'package_details_pdf_path',maxCount:1}]),(req,res)=>{
 
     const newData=new Weekend_Trip_Package({
 
         _id:mongoose.Types.ObjectId(),
         weekend_trip_common_city_id:req.body.weekend_trip_common_city_id,
-        front_image_path:req.files.front_image_path,
+        front_image_path:req.files.front_image_path[0].path,
         package_details_web_url:req.body.package_details_web_url,
-        package_details_pdf_path:req.files.package_details_pdf_path,
+        package_details_pdf_path:req.files.package_details_pdf_path[0].path,
         package_name:req.body.package_name,
         package_description:req.body.package_description,
         package_number_of_days:req.body.package_number_of_days,

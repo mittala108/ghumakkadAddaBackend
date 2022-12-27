@@ -1,0 +1,6 @@
+1.email verification
+2.routes protection
+3.sending reviews notification to users by using scheduler
+4.sending feedback to user
+5.official accounts 
+6.

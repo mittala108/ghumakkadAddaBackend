@@ -26,7 +26,6 @@ const weekend_trip_total_booking_on_a_particular_date=require('../models/Weekend
 const weekend_trip_user_booking_detail=require('../models/Weekend_Trip/weekend_trip_user_booking_detail');
 
 const user=require('../models/user_models/user');
-const payments=require('../models/payments_related_models/payment');
 
 AdminBro.registerAdapter(mongooseAdminBro)
 
@@ -34,7 +33,6 @@ const AdminBroOptions={
     
     resources:[
         user,
-        payments,
         backpacking_trip_state,
         backpacking_trip_common_city,
         backpacking_trip_package,

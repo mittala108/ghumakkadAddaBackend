@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const payment=mongoose.Schema({
+const weekend_trip_payment_detail=mongoose.Schema({
     
     amount:{type:Number},
     customer_email:{type:String},
@@ -14,4 +14,4 @@ const payment=mongoose.Schema({
 
 });
 
-module.exports=mongoose.model('Payment',payment);
+module.exports=mongoose.model('Weekend_Trip_Payment_Detail',weekend_trip_payment_detail);

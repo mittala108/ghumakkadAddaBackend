@@ -9,6 +9,7 @@ const backpacking_trip_package_dates=require('./backpacking_trip_routes/backpack
 const backpacking_trip_total_bookings_on_a_particular_date=require('./backpacking_trip_routes/backpacking_trip_total_bookings_on_a_particular_date');
 const backpacking_trip_tour_guide_infos=require('./backpacking_trip_routes/backpacking_trip_tour_guide_infos');
 const backpacking_trip_users_booking_detail=require('./backpacking_trip_routes/backpacking_trip_users_booking_detail');
+const backpacking_trip_payment_details=require('./backpacking_trip_routes/backpacking_trip_payment_details');
 
 //Bike_trip
 const bike_trip_common_cities=require('./bike_trip_routes/bike_trip_common_cities');
@@ -17,6 +18,7 @@ const bike_trip_package_dates=require('./bike_trip_routes/bike_trip_package_date
 const bike_trip_total_bookings_on_a_particular_date=require('./bike_trip_routes/bike_trip_total_bookings_on_a_particular_date');
 const bike_trip_tour_guide_infos=require('./bike_trip_routes/bike_trip_tour_guide_infos');
 const bike_trip_users_booking_detail=require('./bike_trip_routes/bike_trip_users_booking_detail');
+const bike_trip_payment_details=require('./bike_trip_routes/bike_trip_payment_details');
 
 //Weekend_trip
 
@@ -26,23 +28,13 @@ const weekend_trip_package_dates=require('./weekend_trip_routes/weekend_trip_pac
 const weekend_trip_total_bookings_on_a_particular_date=require('./weekend_trip_routes/weekend_trip_total_bookings_on_a_particular_date');
 const weekend_trip_tour_guide_infos=require('./weekend_trip_routes/weekend_trip_tour_guide_infos');
 const weekend_trip_users_booking_detail=require('./weekend_trip_routes/weekend_trip_users_booking_detail');
-
-//Payments_related_routes
-const payments=require('./payment_related_routes/payments');
-
+const weekend_trip_payment_details=require('./weekend_trip_routes/weekend_trip_payment_details');
 
 //User_related_routes
-
 const users=require('./user_related_routes/users');
 
-
 //Email_verification
-
 const email_verification=require('./email_verification_routes/email_verification');
-
-
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -56,6 +48,7 @@ router.use('/backpacking_trip_related_routes/backpacking_trip_package_dates',bac
 router.use('/backpacking_trip_related_routes/backpacking_trip_total_bookings_on_a_particular_date',backpacking_trip_total_bookings_on_a_particular_date);
 router.use('/backpacking_trip_related_routes/backpacking_trip_tour_guide_infos',backpacking_trip_tour_guide_infos);
 router.use('/backpacking_trip_related_routes/backpacking_trip_users_booking_detail',backpacking_trip_users_booking_detail);
+router.use('/backpacking_trip_related_routes/backpacking_trip_payment_details',backpacking_trip_payment_details);
 
 //bike_trip_routes
 router.use('/bike_trip_related_routes/bike_trip_copmmon_cities',bike_trip_common_cities);
@@ -64,6 +57,7 @@ router.use('/bike_trip_related_routes/bike_trip_package_dates',bike_trip_package
 router.use('/bike_trip_related_routes/bike_trip_total_bookings_on_a_particular_date',bike_trip_total_bookings_on_a_particular_date);
 router.use('/bike_trip_related_routes/bike_trip_tour_guide_infos',bike_trip_tour_guide_infos);
 router.use('/bike_trip_related_routes/bike_trip_users_booking_detail',bike_trip_users_booking_detail);
+router.use('/bike_trip_related_routes/bike_trip_payment_details',bike_trip_payment_details);
 
 //weekend_trip_routes
 router.use('/weekend_trip_related_routes/weekend_trip_common_cities',Weekend_trip_common_cities);
@@ -72,10 +66,7 @@ router.use('/weekend_trip_related_routes/weekend_trip_package_dates',weekend_tri
 router.use('/weekend_trip_related_routes/weekend_trip_total_bookings_on_a_particular_date',weekend_trip_total_bookings_on_a_particular_date);
 router.use('/weekend_trip_related_routes/weekend_trip_tour_guide_infos',weekend_trip_tour_guide_infos);
 router.use('/weekend_trip_related_routes/weekend_trip_users_booking_detail',weekend_trip_users_booking_detail);
-
-
-//Payment_related_routes
-router.use('/payment_related_routes/payments',payments);
+router.use('/weekend_trip_related_routes/weekend_trip_payment_details',weekend_trip_payment_details);
 
 //User_related_routes
 router.use('/user_related_routes/users',users);

@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const Razorpay=require('razorpay');
 const mongoose=require('mongoose');
-const Payment=require('../../models/payments_related_models/payment');
+const Weekend_Trip_Payment_Detail=require('../../models/Weekend_Trip/weekend_trip_payment_detail');
 const fetch = require('node-fetch');
 
 var instance = new Razorpay({ key_id: 'rzp_test_nb1AYTw8yqhy68', key_secret: '3vuOI64r8EI57rPzDzxpZtbo' });
@@ -19,7 +19,7 @@ router.get('/call_back_url/:user_ns/:amount/:customerPhoneNumber/:customerEmail'
             if(data.status=='captured')
             {
                 console.log('jjjjjjj');
-                const payment=new Payment({
+                const newData=new Weekend_Trip_Payment_Detail({
 
                     _id:new mongoose.Types.ObjectId(),
                     razorpay_payment_Id:req.query.razorpay_payment_id,
@@ -31,7 +31,7 @@ router.get('/call_back_url/:user_ns/:amount/:customerPhoneNumber/:customerEmail'
                     amount:parseInt(req.params.amount,10)
                 });
 
-                payment.save()
+                newData.save()
                 .then(result=>{
 
                     console.log('payment success');
@@ -107,7 +107,7 @@ router.get('/getPaymentLink',(req,res)=>{
         ],
         sms_notify:1,
         email_notify:1,
-        callback_url: `http://localhost:8000/admin/sub_routes/payment_related_routes/payments/call_back_url/${req.body.user_ns}/${req.body.totalAmountOfTrip}/${req.body.customerPhoneNumber}/${req.body.customerEmail}`,
+        callback_url: `http://localhost:8000/admin/sub_routes/weekend_trip_related_routes/weekend_trip_payment_details/call_back_url/${req.body.user_ns}/${req.body.totalAmountOfTrip}/${req.body.customerPhoneNumber}/${req.body.customerEmail}`,
         callback_method: "get"
       })
       .then(response=>{

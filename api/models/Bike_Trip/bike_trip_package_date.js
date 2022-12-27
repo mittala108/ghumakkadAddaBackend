@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const bike_trip_package_date=mongoose.Schema({
 
     bike_trip_package_id:{type:mongoose.Schema.Types.ObjectId,ref:'Bike_Trip_Package'},
-    date:{type:Date}
+    date:{type:String}
 
 });
 
