@@ -6,7 +6,19 @@ const Backpacking_Trip_Tour_Guide_Info=require('../../models/Backpacking_Trip/ba
 router.get('/get_backpacking_trip_tour_guide_info',(req,res)=>{
 
     Backpacking_Trip_Tour_Guide_Info.find()
-    .populate('backpacking_trip_package_id')
+    .populate(
+        {
+            path:'backpacking_trip_package_id',
+            populate:{
+                path:'backpacking_trip_common_city_id',
+                model:'Backpacking_Trip_Common_City',
+                populate:{
+                    path:'backpacking_trip_state_id',
+                    model:'Backpacking_Trip_State'
+                }
+            }
+        }
+    )
     .exec()
     .then(result=>{
         res.json({

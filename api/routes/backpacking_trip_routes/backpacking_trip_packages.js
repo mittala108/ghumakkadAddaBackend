@@ -40,7 +40,13 @@ router.get('/get_backpacking_trip_packages/:backpacking_trip_common_city_id',(re
 //route for retool admin panel
 router.get('/get_backpacking_trip_packages',(req,res)=>{
     Backpacking_Trip_Package.find()
-    .populate('backpacking_trip_common_city_id')
+    .populate({
+        path:'backpacking_trip_common_city_id',
+        populate:{
+            path:'backpacking_trip_state_id',
+            model:'Backpacking_Trip_State'
+        }
+    })
     .exec()
     .then(result=>{
         res.json({

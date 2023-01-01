@@ -52,6 +52,21 @@ router.get('/get_backpacking_trip_packages_cost/:backpacking_trip_package_date_i
 router.get('/get_backpacking_trip_packages_cost',(req,res)=>{
 
     Backpacking_Trip_Package_Cost.find()
+    .populate({
+        path:'backpacking_trip_package_date_id',
+        populate:{
+            path:'backpacking_trip_package_id',
+            model:'Backpacking_Trip_Package',
+            populate:{
+            path:'backpacking_trip_common_city_id',
+            model:'Backpacking_Trip_Common_City',
+            populate:{
+                path:'backpacking_trip_state_id',
+                model:'Backpacking_Trip_State'
+            }
+        }
+        }
+    })
     .exec()
     .then(result=>{
         res.json({

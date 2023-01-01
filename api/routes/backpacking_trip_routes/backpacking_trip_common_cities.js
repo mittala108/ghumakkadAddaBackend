@@ -101,4 +101,5 @@ router.post('/post_backpacking_trip_common_city',upload.single('common_city_imag
 // });
 
 
+
 module.exports=router;

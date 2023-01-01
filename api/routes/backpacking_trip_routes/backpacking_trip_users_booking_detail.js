@@ -10,7 +10,18 @@ var randomstring = require("randomstring");
 router.get('/get_backpacking_trip_user_booking_details',(req,res)=>{
 
     Backpacking_Trip_User_Booking_Detail.find()
-    .populate('backpacking_trip_package_id')
+    .populate({
+        path:'backpacking_trip_package_id',
+        populate:{
+            path:'backpacking_trip_common_city_id',
+            model:'Backpacking_Trip_Common_City',
+            populate:{
+                path:'backpacking_trip_state_id',
+                model:'Backpacking_Trip_State'
+            }
+        }
+    })
+    .populate('user_id payment_details_id')
     .exec()
     .then(result=>{
         res.json({

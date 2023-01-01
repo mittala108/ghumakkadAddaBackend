@@ -10,7 +10,17 @@ var instance = new Razorpay({ key_id: 'rzp_test_nb1AYTw8yqhy68', key_secret: '3v
 
 router.get('/get_all_payment_details',(req,res)=>{
     Backpacking_Trip_Payment_Detail.find()
-    .populate('backpacking_trip_package_id')
+    .populate({
+        path:'backpacking_trip_package_id',
+        populate:{
+            path:'backpacking_trip_common_city_id',
+            model:'Backpacking_Trip_Common_City',
+            populate:{
+                path:'backpacking_trip_state_id',
+                model:'Backpacking_Trip_State'
+            }
+        }
+    })
     .exec()
     .then(result=>{
         res.json({
