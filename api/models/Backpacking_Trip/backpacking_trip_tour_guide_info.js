@@ -4,10 +4,11 @@ const backpacking_trip_tour_guide_info=mongoose.Schema({
 
     phone_number:{type:String},
     email:{type:String},
-    package_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Package'},
+    backpacking_trip_package_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Package'},
+    package_id:{type:String},
     webhook_url:{type:String},
     extra_data_in_object_type:{type:mongoose.Schema.Types.Mixed,default:{}},
-    extra_data_in_array_type:{type:Array,default:[]}
+    total_user_bookings_for_particular_package:{type:Array,default:[]}
 });
 
 

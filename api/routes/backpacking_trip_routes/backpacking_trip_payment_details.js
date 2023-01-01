@@ -8,11 +8,26 @@ const fetch = require('node-fetch');
 var instance = new Razorpay({ key_id: 'rzp_test_nb1AYTw8yqhy68', key_secret: '3vuOI64r8EI57rPzDzxpZtbo' });
 
 
+router.get('/get_all_payment_details',(req,res)=>{
+    Backpacking_Trip_Payment_Detail.find()
+    .populate('backpacking_trip_package_id')
+    .exec()
+    .then(result=>{
+        res.json({
+            data:result,
+            count:result.length
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
 
 
 
-
-router.get('/call_back_url/:user_ns/:amount/:customerPhoneNumber/:customerEmail',(req,res)=>{
+router.get('/call_back_url/:user_ns/:amount/:customerPhoneNumber/:customerEmail/:backpacking_trip_package_id',(req,res)=>{
 
         instance.payments.fetch(req.query.razorpay_payment_id)
         .then(data=>{
@@ -22,11 +37,13 @@ router.get('/call_back_url/:user_ns/:amount/:customerPhoneNumber/:customerEmail'
                 const newData=new Backpacking_Trip_Payment_Detail({
 
                     _id:new mongoose.Types.ObjectId(),
-                    razorpay_payment_Id:req.query.razorpay_payment_id,
+                    backpacking_trip_package_id:req.params.backpacking_trip_package_id,
+                    razorpay_payment_id:req.query.razorpay_payment_id,
                     razorpay_signature:req.query.razorpay_signature,
                     date_of_payment:new Date(),
+                    razorpay_invoice_id:req.query.razorpay_invoice_id,
                     customer_phone_number:req.params.customerPhoneNumber,
-                    razorpay_order_Id:data.order_id,
+                    razorpay_order_id:data.order_id,
                     customer_email:req.params.customerEmail,
                     amount:parseInt(req.params.amount,10)
                 });
@@ -107,7 +124,7 @@ router.get('/getPaymentLink',(req,res)=>{
         ],
         sms_notify:1,
         email_notify:1,
-        callback_url: `http://localhost:8000/admin/sub_routes/backpacking_trip_related_routes/backpacking_trip_payment_details/call_back_url/${req.body.user_ns}/${req.body.totalAmountOfTrip}/${req.body.customerPhoneNumber}/${req.body.customerEmail}`,
+        callback_url: `http://localhost:8000/admin/sub_routes/backpacking_trip_related_routes/backpacking_trip_payment_details/call_back_url/${req.body.user_ns}/${req.body.totalAmountOfTrip}/${req.body.customerPhoneNumber}/${req.body.customerEmail}/${req.body.backpacking_trip_package_id}`,
         callback_method: "get"
       })
       .then(response=>{

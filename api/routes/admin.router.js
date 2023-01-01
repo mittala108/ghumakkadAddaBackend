@@ -10,6 +10,8 @@ const backpacking_trip_package_date=require('../models/Backpacking_Trip/backpack
 const backpacking_trip_tour_guide_info=require('../models/Backpacking_Trip/backpacking_trip_tour_guide_info');
 const backpacking_trip_total_booking_on_a_particular_date=require('../models/Backpacking_Trip/backpacking_trip_total_booking_on_a_particular_date');
 const backpacking_trip_user_booking_detail=require('../models/Backpacking_Trip/backpacking_trip_user_booking_detail');
+const backpacking_trip_package_cost=require('../models/Backpacking_Trip/backpacking_trip_package_cost');
+const backpacking_trip_payment_detail=require('../models/Backpacking_Trip/backpacking_trip_payment_detail');
 
 const bike_trip_common_city=require('../models/Bike_Trip/bike_trip_common_city');
 const bike_trip_package=require('../models/Bike_Trip/bike_trip_package');
@@ -40,6 +42,8 @@ const AdminBroOptions={
         backpacking_trip_tour_guide_info,
         backpacking_trip_total_booking_on_a_particular_date,
         backpacking_trip_user_booking_detail,
+        backpacking_trip_package_cost,
+        backpacking_trip_payment_detail,
         bike_trip_common_city,
         bike_trip_package,
         bike_trip_package_date,

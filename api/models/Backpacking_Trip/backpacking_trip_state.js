@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const backpacking_trip_state=mongoose.Schema({
 
     state:{type:String},
-    image_path:{type:String}
+    state_image_path:{type:String}
 
 });
 

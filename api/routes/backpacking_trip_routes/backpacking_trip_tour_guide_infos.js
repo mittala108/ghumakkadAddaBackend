@@ -3,7 +3,55 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Backpacking_Trip_Tour_Guide_Info=require('../../models/Backpacking_Trip/backpacking_trip_tour_guide_info');
 
+router.get('/get_backpacking_trip_tour_guide_info',(req,res)=>{
 
+    Backpacking_Trip_Tour_Guide_Info.find()
+    .populate('backpacking_trip_package_id')
+    .exec()
+    .then(result=>{
+        res.json({
+            data:result,
+            count:result.length
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
+
+router.post('/add_user_booking_id_in_a_array',(req,res)=>{
+
+    Backpacking_Trip_Tour_Guide_Info.find({
+        backpacking_trip_package_id:req.body.backpacking_trip_package_id
+    })
+    .exec()
+    .then(result=>{
+        const arrayLength=result[0].total_user_bookings_for_particular_package.length;
+          result[0].total_user_bookings_for_particular_package[arrayLength]=req.body.user_booking_id;
+
+          Backpacking_Trip_Tour_Guide_Info.updateOne({
+            backpacking_trip_package_id:req.body.backpacking_trip_package_id
+          },
+          {
+            total_user_bookings_for_particular_package:result[0].total_user_bookings_for_particular_package
+
+          })
+          .exec()
+          .then(data=>{
+            res.json({
+                message:'user booking id added successfully',
+                data:data
+            });
+          });       
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
 
 router.post('/post_backpacking_trip_tour_guide_info',(req,res)=>{
 
@@ -11,6 +59,7 @@ router.post('/post_backpacking_trip_tour_guide_info',(req,res)=>{
         _id:new mongoose.Types.ObjectId(),
         phone_number:req.body.phone_number,
         email:req.body.email,
+        backpacking_trip_package_id:req.body.backpacking_trip_package_id,
         package_id:req.body.package_id,
         webhook_url:req.body.webhook_url
     });
@@ -51,7 +100,7 @@ router.get('/get_backpacking_trip_tour_guide_info/:package_id',(req,res)=>{
 router.get('/send_data_to_backpacking_trip_tour_guide',(req,res)=>{
     
     Backpacking_Trip_Tour_Guide_Info.find({
-        package_id:req.body.package_id
+        backpacking_trip_package_id:req.body.backpacking_trip_package_id
     })
     .exec()
     .then(result2=>{

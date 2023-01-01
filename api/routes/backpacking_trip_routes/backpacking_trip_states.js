@@ -41,13 +41,14 @@ router.post('/post_backpacking_trip_state',upload.single('state_image'),(req,res
 
         _id:mongoose.Types.ObjectId(),
         state:req.body.state,
-        image_path:req.file.path
+        state_image_path:req.file.path
     });
 
     newData.save()
     .then(result=>{
         res.json({
-            message:'Data saved successfully'
+            message:'Data saved successfully',
+            data:result
         });
     })
     .catch(err=>{
