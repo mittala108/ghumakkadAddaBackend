@@ -11,6 +11,9 @@ const backpacking_trip_tour_guide_infos=require('./backpacking_trip_routes/backp
 const backpacking_trip_users_booking_detail=require('./backpacking_trip_routes/backpacking_trip_users_booking_detail');
 const backpacking_trip_payment_details=require('./backpacking_trip_routes/backpacking_trip_payment_details');
 const backpacking_trip_packages_cost=require('./backpacking_trip_routes/backpacking_trip_packages_cost');
+const backpacking_trip_group_or_solo_travelling=require('./backpacking_trip_routes/backpacking_trip_group_or_solo_travelling');
+const backpacking_trip_travel_modes=require('./backpacking_trip_routes/backpacking_trip_travel_modes');
+
 
 //Bike_trip
 const bike_trip_common_cities=require('./bike_trip_routes/bike_trip_common_cities');
@@ -53,6 +56,8 @@ router.use('/backpacking_trip_related_routes/backpacking_trip_tour_guide_infos',
 router.use('/backpacking_trip_related_routes/backpacking_trip_users_booking_detail',backpacking_trip_users_booking_detail);
 router.use('/backpacking_trip_related_routes/backpacking_trip_payment_details',backpacking_trip_payment_details);
 router.use('/backpacking_trip_related_routes/backpacking_trip_packages_cost',backpacking_trip_packages_cost);
+router.use('/backpacking_trip_related_routes/backpacking_trip_travel_modes',backpacking_trip_travel_modes);
+router.use('/backpacking_trip_related_routes/backpacking_trip_group_or_solo_travelling',backpacking_trip_group_or_solo_travelling);
 
 //bike_trip_routes
 router.use('/bike_trip_related_routes/bike_trip_copmmon_cities',bike_trip_common_cities);

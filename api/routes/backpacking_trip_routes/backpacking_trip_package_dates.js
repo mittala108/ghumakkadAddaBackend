@@ -3,6 +3,7 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Backpacking_Trip_Package_Date=require('../../models/Backpacking_Trip/backpacking_trip_package_date');
 const Backpacking_Trip_Package_Cost=require('../../models/Backpacking_Trip/backpacking_trip_package_cost');
+const Backpacking_Trip_Group_Or_Solo_Travel=require('../../models/Backpacking_Trip/backpacking_trip_group_or_solo_travel');
 const scheduler=require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
 const fetch=require('node-fetch');
@@ -31,15 +32,19 @@ router.get('/get_backpacking_trip_package_dates/:backpacking_trip_package_id',(r
 router.get('/get_backpacking_trip_package_dates',(req,res)=>{
     Backpacking_Trip_Package_Date.find()
     .populate({
-        path:'backpacking_trip_package_id',
-        populate:{
-            path:'backpacking_trip_common_city_id',
-            model:'Backpacking_Trip_Common_City',
+            path:'backpacking_trip_package_id',
             populate:{
-                path:'backpacking_trip_state_id',
-                model:'Backpacking_Trip_State'
+                path:'backpacking_trip_travel_mode_id',
+                model:'Backpacking_Trip_Travel_Mode',
+                populate:{
+                    path:'backpacking_trip_common_city_id',
+                    model:'Backpacking_Trip_Common_City',
+                    populate:{
+                        path:'backpacking_trip_state_id',
+                        model:'Backpacking_Trip_State'
+                    }
+                }         
             }
-        }
     })
     .exec()
     .then(result=>{
@@ -179,7 +184,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
         {
             console.log('i am here 6');
             const newDate=getDate-1;
-            const date1 = new Date(getFullYear,getMonth,newDate,19,14,00);
+            const date1 = new Date(getFullYear,getMonth,newDate,16,00,00);
             console.log(date1);   
             fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -219,7 +224,21 @@ router.delete('/delete_date_and_cost_from_database/:package_date_id',(req,res)=>
     .then(result=>{
         console.log('package cost deleted successfully');
 
-    });
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+
+    Backpacking_Trip_Group_Or_Solo_Travel.deleteMany({backpacking_trip_package_date_id:req.params.backpacking_trip_package_date_id})
+    .exec()
+    .then(result=>{
+        res.json({
+            message:'travel group record deleted successfully'
+        });
+    })
+    .catch(err=>{
+        console.log(err)
+    })
 
 });
 

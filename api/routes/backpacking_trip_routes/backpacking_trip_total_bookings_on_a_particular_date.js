@@ -10,14 +10,18 @@ router.get('/get_backpacking_trip_total_bookings_on_a_particular_date',(req,res)
    Backpacking_Trip_Total_Booking_On_A_Particular_Date.find()
    .populate({
       path:'backpacking_trip_package_id',
-      populate:{
-          path:'backpacking_trip_common_city_id',
-          model:'Backpacking_Trip_Common_City',
-          populate:{
-              path:'backpacking_trip_state_id',
-              model:'Backpacking_Trip_State'
-          }
-      }
+            populate:{
+                path:'backpacking_trip_travel_mode_id',
+                model:'Backpacking_Trip_Travel_Mode',
+                populate:{
+                    path:'backpacking_trip_common_city_id',
+                    model:'Backpacking_Trip_Common_City',
+                    populate:{
+                        path:'backpacking_trip_state_id',
+                        model:'Backpacking_Trip_State'
+                    }
+                }         
+            }
   })
    .exec()
    .then(result=>{
@@ -37,7 +41,7 @@ router.get('/get_backpacking_trip_total_bookings_on_a_particular_date',(req,res)
 router.post('/add_backpacking_trip_bookings_on_a_particular_date',(req,res)=>{
 
       const actual_trip_id='TI'+String(randomstring.generate({
-         length:13,
+         length:12,
          charset:'numeric'
       }));
 

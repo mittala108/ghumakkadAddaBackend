@@ -12,14 +12,18 @@ router.get('/get_all_payment_details',(req,res)=>{
     Backpacking_Trip_Payment_Detail.find()
     .populate({
         path:'backpacking_trip_package_id',
-        populate:{
-            path:'backpacking_trip_common_city_id',
-            model:'Backpacking_Trip_Common_City',
             populate:{
-                path:'backpacking_trip_state_id',
-                model:'Backpacking_Trip_State'
+                path:'backpacking_trip_travel_mode_id',
+                model:'Backpacking_Trip_Travel_Mode',
+                populate:{
+                    path:'backpacking_trip_common_city_id',
+                    model:'Backpacking_Trip_Common_City',
+                    populate:{
+                        path:'backpacking_trip_state_id',
+                        model:'Backpacking_Trip_State'
+                    }
+                }         
             }
-        }
     })
     .exec()
     .then(result=>{

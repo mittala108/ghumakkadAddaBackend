@@ -19,9 +19,9 @@ const storage=multer.diskStorage({
 const upload=multer({storage:storage});
 
 //route for uchat
-router.get('/get_backpacking_trip_packages/:backpacking_trip_common_city_id',(req,res)=>{
+router.get('/get_backpacking_trip_packages/:backpacking_trip_travel_mode_id',(req,res)=>{
 
-    Backpacking_Trip_Package.find({backpacking_trip_common_city_id:req.params.backpacking_trip_common_city_id,period:'new'})
+    Backpacking_Trip_Package.find({backpacking_trip_travel_mode_id:req.params.backpacking_trip_travel_mode_id,period:'new'})
     .exec()
     .then(result=>{
         res.json({
@@ -41,10 +41,14 @@ router.get('/get_backpacking_trip_packages/:backpacking_trip_common_city_id',(re
 router.get('/get_backpacking_trip_packages',(req,res)=>{
     Backpacking_Trip_Package.find()
     .populate({
-        path:'backpacking_trip_common_city_id',
+        path:'backpacking_trip_travel_mode_id',
         populate:{
-            path:'backpacking_trip_state_id',
-            model:'Backpacking_Trip_State'
+            path:'backpacking_trip_common_city_id',
+            model:'Backpacking_Trip_Common_City',
+            populate:{
+                path:'backpacking_trip_state_id',
+                model:'Backpacking_Trip_State'
+            }
         }
     })
     .exec()
@@ -66,7 +70,7 @@ router.post('/post_backpacking_trip_package',upload.fields([{name:'package_front
 
 
     const actual_package_id='BATP'+String(randomstring.generate({
-        length:11,
+        length:12,
         charset:'numeric'
     }));
     
@@ -75,7 +79,7 @@ router.post('/post_backpacking_trip_package',upload.fields([{name:'package_front
 
         _id:mongoose.Types.ObjectId(),
         package_id:actual_package_id,
-        backpacking_trip_common_city_id:req.body.backpacking_trip_common_city_id,
+        backpacking_trip_travel_mode_id:req.body.backpacking_trip_travel_mode_id,
         package_front_image_path:req.files.package_front_image[0].path,
         package_details_web_url:req.body.package_details_web_url,
         package_details_pdf_path:req.files.package_details_pdf[0].path,

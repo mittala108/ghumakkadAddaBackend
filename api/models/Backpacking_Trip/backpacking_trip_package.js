@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const backpacking_trip_package=mongoose.Schema({
     
     package_id:{type:String},
-    backpacking_trip_common_city_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Common_City'},
+    backpacking_trip_travel_mode_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Travel_Mode'},
     package_front_image_path:{type:String},
     package_details_web_url:{type:String},
     package_details_pdf_path:{type:String},

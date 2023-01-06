@@ -12,14 +12,18 @@ router.get('/get_backpacking_trip_user_booking_details',(req,res)=>{
     Backpacking_Trip_User_Booking_Detail.find()
     .populate({
         path:'backpacking_trip_package_id',
-        populate:{
-            path:'backpacking_trip_common_city_id',
-            model:'Backpacking_Trip_Common_City',
             populate:{
-                path:'backpacking_trip_state_id',
-                model:'Backpacking_Trip_State'
+                path:'backpacking_trip_travel_mode_id',
+                model:'Backpacking_Trip_Travel_Mode',
+                populate:{
+                    path:'backpacking_trip_common_city_id',
+                    model:'Backpacking_Trip_Common_City',
+                    populate:{
+                        path:'backpacking_trip_state_id',
+                        model:'Backpacking_Trip_State'
+                    }
+                }         
             }
-        }
     })
     .populate('user_id payment_details_id')
     .exec()
@@ -63,8 +67,10 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
         email:req.body.email,
         state:req.body.state,      
         common_city:req.body.common_city,
+        travel_mode:req.body.travel_mode,
         backpacking_trip_package_id:req.body.backpacking_trip_package_id,
         date_of_journey:date_of_journey,
+        travel_grouping:req.body.travel_grouping,
         no_of_bookings:req.body.no_of_bookings,
         total_amount_paid:req.body.total_amount_paid,
         cost_of_package:req.body.cost_of_package,
@@ -98,7 +104,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
 
             else if(number_nm<=31)
             {
-                const date1 = new Date(getFullYear,getMonth,number_nm,19,21,00);
+                const date1 = new Date(getFullYear,getMonth,number_nm,12,00,00);
                 console.log(date1);
                 console.log('2');
                 fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{

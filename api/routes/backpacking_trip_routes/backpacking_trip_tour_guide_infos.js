@@ -10,12 +10,16 @@ router.get('/get_backpacking_trip_tour_guide_info',(req,res)=>{
         {
             path:'backpacking_trip_package_id',
             populate:{
-                path:'backpacking_trip_common_city_id',
-                model:'Backpacking_Trip_Common_City',
+                path:'backpacking_trip_travel_mode_id',
+                model:'Backpacking_Trip_Travel_Mode',
                 populate:{
-                    path:'backpacking_trip_state_id',
-                    model:'Backpacking_Trip_State'
-                }
+                    path:'backpacking_trip_common_city_id',
+                    model:'Backpacking_Trip_Common_City',
+                    populate:{
+                        path:'backpacking_trip_state_id',
+                        model:'Backpacking_Trip_State'
+                    }
+                }         
             }
         }
     )
