@@ -9,7 +9,7 @@ const backpacking_trip_total_booking_on_a_particular_date=mongoose.Schema({
     date_of_journey:{type:Date},
     total_bookings:{type:Number,default:0},
     extra_data_in_object_type:{type:mongoose.Schema.Types.Mixed,default:{}},
-    extra_data_in_array_type:{type:Array,default:[]}
+    bookings_id_array_for_this_particular_date:{type:Array,default:[]}
 
 
 });

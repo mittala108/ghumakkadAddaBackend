@@ -40,14 +40,14 @@ router.post('/add_user_booking_id_in_a_array',(req,res)=>{
     })
     .exec()
     .then(result=>{
-        const arrayLength=result[0].total_user_bookings_for_particular_package.length;
-          result[0].total_user_bookings_for_particular_package[arrayLength]=req.body.user_booking_id;
+        const arrayLength=result[0].bookings_id_array_for_this_particular_package.length;
+          result[0].bookings_id_array_for_this_particular_package[arrayLength]=req.body.booking_id;
 
           Backpacking_Trip_Tour_Guide_Info.updateOne({
             backpacking_trip_package_id:req.body.backpacking_trip_package_id
           },
           {
-            total_user_bookings_for_particular_package:result[0].total_user_bookings_for_particular_package
+            bookings_id_array_for_this_particular_package:result[0].bookings_id_array_for_this_particular_package
 
           })
           .exec()
@@ -73,7 +73,8 @@ router.post('/post_backpacking_trip_tour_guide_info',(req,res)=>{
         email:req.body.email,
         backpacking_trip_package_id:req.body.backpacking_trip_package_id,
         package_id:req.body.package_id,
-        webhook_url:req.body.webhook_url
+        webhook_url:req.body.webhook_url,
+        user_ns:req.body.user_ns
     });
 
     backpacking_trip_tour_guide_info.save()

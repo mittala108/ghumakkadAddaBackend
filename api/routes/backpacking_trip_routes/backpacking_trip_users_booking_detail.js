@@ -90,22 +90,19 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
                 console.log(date1);
                 console.log('1');
-                const job=uuidv4();
-                    scheduler.scheduleJob(`${job}`,date1,()=>{
-                        sendReviewMessageToCustomer(req.body.user_ns);
-                        scheduler.cancelJob(`${job}`);
+                
+                    fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                     });
             }
 
             else if(number_nm<=31)
             {
-                const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
+                const date1 = new Date(getFullYear,getMonth,number_nm,19,21,00);
                 console.log(date1);
                 console.log('2');
-                const job=uuidv4();
-                scheduler.scheduleJob(`${job}`,date1,()=>{
-                    sendReviewMessageToCustomer(req.body.user_ns);
-                    scheduler.cancelJob(`${job}`);
+                fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                 });
 
             }
@@ -121,10 +118,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
                 console.log(date1);
                 console.log('3');
-                const job=uuidv4();
-                scheduler.scheduleJob(`${job}`,date1,()=>{
-                    sendReviewMessageToCustomer(req.body.user_ns);
-                    scheduler.cancelJob(`${job}`);
+                fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                 });
             }
 
@@ -133,10 +128,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
                 console.log(date1);
                 console.log('4');
-                const job=uuidv4();
-                scheduler.scheduleJob(`${job}`,date1,()=>{
-                    sendReviewMessageToCustomer(req.body.user_ns);
-                    scheduler.cancelJob(`${job}`);
+                fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                 });
 
             }
@@ -154,10 +147,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                         const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
                         console.log(date1);
                         console.log('7');
-                        const job=uuidv4();
-                        scheduler.scheduleJob(`${job}`,date1,()=>{
-                            sendReviewMessageToCustomer(req.body.user_ns);
-                            scheduler.cancelJob(`${job}`);
+                        fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                            method:'GET'
                         });
                     }
 
@@ -168,10 +159,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                         const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
                         console.log(date1);
                         console.log('8');
-                        const job=uuidv4();
-                        scheduler.scheduleJob(`${job}`,date1,()=>{
-                            sendReviewMessageToCustomer(req.body.user_ns);
-                            scheduler.cancelJob(`${job}`);
+                        fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                            method:'GET'
                         });
 
                     }
@@ -186,10 +175,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
                     console.log(date1);
                     console.log('5');
-                    const job=uuidv4();
-                    scheduler.scheduleJob(`${job}`,date1,()=>{
-                        sendReviewMessageToCustomer(req.body.user_ns);
-                        scheduler.cancelJob(`${job}`);
+                    fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                     });
                 }
     
@@ -198,10 +185,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
                     console.log(date1);
                     console.log('6');
-                    const job=uuidv4();
-                    scheduler.scheduleJob(`${job}`,date1,()=>{
-                        sendReviewMessageToCustomer(req.body.user_ns);
-                        scheduler.cancelJob(`${job}`);
+                    fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                     });
     
                 }
@@ -220,10 +205,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     const date1 = new Date(newFullYear,newMonth,newDate,12, 00, 00);
                     console.log(date1);
                     console.log('9');
-                    const job=uuidv4();
-                    scheduler.scheduleJob(`${job}`,date1,()=>{
-                        sendReviewMessageToCustomer(req.body.user_ns);
-                        scheduler.cancelJob(`${job}`);
+                    fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                     });
                 }
     
@@ -233,9 +216,8 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     console.log(date1);
                     console.log('10');
                     const job=uuidv4();
-                    scheduler.scheduleJob(`${job}`,date1,()=>{
-                        sendReviewMessageToCustomer(req.body.user_ns);
-                        scheduler.cancelJob(`${job}`);
+                    fetch(`http://localhost:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
+                        method:'GET'
                     });
     
                 }           
@@ -253,25 +235,6 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
     });
 
 });
-
-
-const sendReviewMessageToCustomer=(user_ns)=>{
-
-    const jsonPayLoad={
-        "user_ns":user_ns
-    };
-
-
-    fetch('https://www.uchat.com.au/api/iwh/1971d09d8c28e042e424188499eed502',{
-        method:'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:JSON.stringify(jsonPayLoad)
-    })
-    .then(response=>{
-
-    });
-}
-
 
 
 

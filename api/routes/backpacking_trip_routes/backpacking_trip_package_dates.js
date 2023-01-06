@@ -5,6 +5,7 @@ const Backpacking_Trip_Package_Date=require('../../models/Backpacking_Trip/backp
 const Backpacking_Trip_Package_Cost=require('../../models/Backpacking_Trip/backpacking_trip_package_cost');
 const scheduler=require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
+const fetch=require('node-fetch');
 
 //route for uchat
 router.get('/get_backpacking_trip_package_dates/:backpacking_trip_package_id',(req,res)=>{
@@ -70,42 +71,63 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
         date_of_journey:date_toDateString
     });
 
-
     newData.save()
     .then(result=>{
 
-        console.log(getDate);
-        console.log(getMonth);
-        console.log(getFullYear);
-
-        if(getMonth==4 || getMonth==6 || getMonth==7 || getMonth==9 || getMonth==11 && getDate==1)
+        if(getMonth==4 || getMonth==6 || getMonth==7 || getMonth==9 || getMonth==11)
         {
-            console.log('i am here 1');
+            if(getDate==1)
+            {
+                console.log('i am here 1');
                 const newDate=30;
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
                 console.log(date1);
-                const job=uuidv4();
-                scheduler.scheduleJob(`${job}`,date1,()=>{
-                    deleteBackpackingTripPackageDate(date_toDateString,result._id); 
-                    scheduler.cancelJob(`${job}`);                     
-                });     
+                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                });
+
+            }
+
+            else
+            {
+                console.log('i am here 11');
+                const newDate=getDate-1;
+                const date1=new Date(getFullYear,getMonth,newDate,16,00,00);
+                console.log(date1);
+                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                });
+
+            }          
         }
 
-        else if(getMonth==1 || getMonth==3 || getMonth==5 || getMonth==8 || getMonth==10 && getDate==1)
+        else if(getMonth==1 || getMonth==3 || getMonth==5 || getMonth==8 || getMonth==10)
         {
-
+            if(getDate==1)
+            {
                 console.log('i am here 2');
                 const newDate=31;
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16,00,00);
-                console.log(date1);
-                const job=uuidv4();
-                scheduler.scheduleJob(`${job}`,date1,()=>{
-                    deleteBackpackingTripPackageDate(date_toDateString,result._id); 
-                    scheduler.cancelJob(`${job}`);                     
-                });    
+                console.log(date1);  
+                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                }); 
 
+            }
+
+            else
+            {
+                console.log('i am here 22');
+                const newDate=getDate-1;
+                const date1=new Date(getFullYear,getMonth,newDate,16,00,00);
+                console.log(date1);
+                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                });
+
+            }
         }
 
         else if(getDate==1 && getMonth==2)
@@ -118,12 +140,11 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newDate=29;
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
-                console.log(date1);
-                const job=uuidv4();
-                scheduler.scheduleJob(`${job}`,date1,()=>{
-                    deleteBackpackingTripPackageDate(date_toDateString,result._id); 
-                    scheduler.cancelJob(`${job}`);                     
-                });    
+                console.log(date1); 
+                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                }); 
+                 
             }
             else
             {
@@ -131,14 +152,10 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newDate=28;
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
-                console.log(date1);
-                const job=uuidv4();
-                scheduler.scheduleJob(`${job}`,date1,()=>{
-                    deleteBackpackingTripPackageDate(date_toDateString,result._id); 
-                    scheduler.cancelJob(`${job}`);                     
-                });    
-                
-
+                console.log(date1);   
+                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                }); 
             }
                 
            
@@ -152,25 +169,21 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
             const newFullYear=getFullYear-1;
             const date1 = new Date(newFullYear,newMonth,newDate,16, 00, 00);
             console.log(date1);
-            const job=uuidv4();
-            scheduler.scheduleJob(`${job}`,date1,()=>{
-                deleteBackpackingTripPackageDate(date_toDateString,result._id); 
-                scheduler.cancelJob(`${job}`);                     
-            });    
+            fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                }); 
+                
         }
 
         else
         {
             console.log('i am here 6');
             const newDate=getDate-1;
-            const date1 = new Date(getFullYear,getMonth,newDate,20,10,00);
-            console.log(date1);
-            const job=uuidv4();
-            scheduler.scheduleJob(`${job}`,date1,()=>{
-                deleteBackpackingTripPackageDate(date_toDateString,result._id); 
-                scheduler.cancelJob(`${job}`);                     
-            });    
-
+            const date1 = new Date(getFullYear,getMonth,newDate,19,14,00);
+            console.log(date1);   
+            fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                    method:'GET'
+                }); 
         }
 
         res.json({
@@ -186,27 +199,29 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
 });
 
 
-const deleteBackpackingTripPackageDate=(date_toDateString,package_date_id)=>{
+router.delete('/delete_date_and_cost_from_database/:package_date_id',(req,res)=>{
+
+    console.log('date and cost delete function');
 
     Backpacking_Trip_Package_Date
-    .deleteOne({date_of_journey:date_toDateString})
+    .deleteOne({_id:req.params.package_date_id})
     .exec()
     .then(result=>{
-        // scheduler.cancelJob('job1');
+        res.json({
+            message:'date deleted successfully'
+        });
         console.log('date deleted successfully');
     }); 
     
     Backpacking_Trip_Package_Cost
-    .deleteOne({backpacking_trip_package_date_id:package_date_id})
+    .deleteOne({backpacking_trip_package_date_id:req.params.package_date_id})
     .exec()
     .then(result=>{
         console.log('package cost deleted successfully');
 
-    })
+    });
 
-    
-
-}
+});
 
 
 
