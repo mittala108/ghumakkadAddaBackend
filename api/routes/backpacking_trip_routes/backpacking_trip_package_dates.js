@@ -88,7 +88,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
                 console.log(date1);
-                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 });
 
@@ -100,7 +100,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newDate=getDate-1;
                 const date1=new Date(getFullYear,getMonth,newDate,16,00,00);
                 console.log(date1);
-                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 });
 
@@ -116,7 +116,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16,00,00);
                 console.log(date1);  
-                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 }); 
 
@@ -128,7 +128,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newDate=getDate-1;
                 const date1=new Date(getFullYear,getMonth,newDate,16,00,00);
                 console.log(date1);
-                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 });
 
@@ -146,7 +146,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
                 console.log(date1); 
-                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 }); 
                  
@@ -158,7 +158,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 const newMonth=getMonth-1;
                 const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
                 console.log(date1);   
-                fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+                fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 }); 
             }
@@ -174,7 +174,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
             const newFullYear=getFullYear-1;
             const date1 = new Date(newFullYear,newMonth,newDate,16, 00, 00);
             console.log(date1);
-            fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+            fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 }); 
                 
@@ -186,7 +186,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
             const newDate=getDate-1;
             const date1 = new Date(getFullYear,getMonth,newDate,16,00,00);
             console.log(date1);   
-            fetch(`http://localhost:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
+            fetch(`http:// 65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
                 }); 
         }
