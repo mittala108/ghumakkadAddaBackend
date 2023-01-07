@@ -48,8 +48,8 @@ app.get('/experiment',(req,res)=>{
 
 })
 
-app.use('/admin/sub_routes',sub_routes);
-app.use('/admin',adminRouter);
+app.use('/api',sub_routes);
+app.use('/adminPanelAdminBro',adminRouter);
 
 
 
