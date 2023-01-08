@@ -42,11 +42,7 @@ app.get('/experiment',(req,res)=>{
 
     console.log(uuidv4());
     console.log(actual_user_booking_id);
-
-    
-
-
-})
+});
 
 app.use('/api',sub_routes);
 app.use('/adminPanelAdminBro',adminRouter);

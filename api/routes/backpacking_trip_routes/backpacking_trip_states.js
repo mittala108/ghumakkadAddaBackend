@@ -3,6 +3,8 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Backpacking_Trip_State=require('../../models/Backpacking_Trip/backpacking_trip_state');
 const multer=require('multer');
+const fs=require('fs');
+const path = require('path')
 
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
@@ -49,6 +51,30 @@ router.post('/post_backpacking_trip_state',upload.single('state_image'),(req,res
         res.json({
             message:'Data saved successfully',
             data:result
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
+
+router.patch('/update_backpacking_trip_state',upload.single('state_image'),(req,res)=>{
+
+    Backpacking_Trip_State.findOne({_id:req.body.backpacking_trip_state_id})
+    .exec()
+    .then(result=>{
+        const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
+        console.log(filePath);
+        fs.unlinkSync(`${filePath}`);
+        console.log('old state image deleted');
+        Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{state_image_path:req.file.path})
+        .exec()
+        .then(result1=>{
+            res.json({
+                message:'Data updated'
+            });
         });
     })
     .catch(err=>{

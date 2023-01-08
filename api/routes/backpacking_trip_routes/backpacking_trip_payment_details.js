@@ -138,7 +138,7 @@ router.get('/getPaymentLink',(req,res)=>{
         ],
         sms_notify:1,
         email_notify:1,
-        callback_url: `http://localhost:8000/admin/sub_routes/backpacking_trip_related_routes/backpacking_trip_payment_details/call_back_url/${req.body.user_ns}/${req.body.totalAmountOfTrip}/${req.body.customerPhoneNumber}/${req.body.customerEmail}/${req.body.backpacking_trip_package_id}`,
+        callback_url: `http://65.1.3.99:8000/api/backpacking_trip_related_routes/backpacking_trip_payment_details/call_back_url/${req.body.user_ns}/${req.body.totalAmountOfTrip}/${req.body.customerPhoneNumber}/${req.body.customerEmail}/${req.body.backpacking_trip_package_id}`,
         callback_method: "get"
       })
       .then(response=>{
