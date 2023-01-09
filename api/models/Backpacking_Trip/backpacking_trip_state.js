@@ -3,7 +3,7 @@ const mongoose=require('mongoose');
 const backpacking_trip_state=mongoose.Schema({
 
     state:{type:String},
-    is_available:{type:Boolean,default:1},
+    is_available:{type:Boolean,default:0},
     state_image_path:{type:String}
 
 });

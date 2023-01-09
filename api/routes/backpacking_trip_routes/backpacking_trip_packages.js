@@ -18,7 +18,7 @@ const storage=multer.diskStorage({
 
 const upload=multer({storage:storage});
 
-//route for uchat
+
 router.get('/get_backpacking_trip_packages/:backpacking_trip_travel_mode_id',(req,res)=>{
 
     Backpacking_Trip_Package.find({backpacking_trip_travel_mode_id:req.params.backpacking_trip_travel_mode_id,is_available:1})
@@ -158,6 +158,11 @@ router.delete('/delete_backpacking_trip_package_image_and_pdf_file',(req,res)=>{
         fs.unlinkSync(pdfPath);
 
         console.log('old image and pdf deleted');
+        Backpacking_Trip_Package.updateOne({_id:req.body.backpacking_trip_package_id},{package_front_image_path:'',package_details_pdf_path:''})
+        .exec()
+        .then(result=>{
+            console.log('package front image and pdf path data deleted from database');
+        });
         
     })
     .catch(err=>{

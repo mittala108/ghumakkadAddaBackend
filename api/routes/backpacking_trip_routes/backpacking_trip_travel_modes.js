@@ -3,7 +3,7 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Backpacking_Trip_Travel_Mode=require('../../models/Backpacking_Trip/backpacking_trip_travel_mode');
 
-
+//route for uchat
 router.get('/get_backpacking_trip_travel_modes/:backpacking_trip_common_city_id',(req,res)=>{
 
     Backpacking_Trip_Travel_Mode.find({backpacking_trip_common_city_id:req.params.backpacking_trip_common_city_id,is_available:1})
@@ -21,7 +21,7 @@ router.get('/get_backpacking_trip_travel_modes/:backpacking_trip_common_city_id'
     });
 });
 
-
+//route for admin panel
 router.get('/get_backpacking_trip_travel_modes',(req,res)=>{
 
     Backpacking_Trip_Travel_Mode.find()

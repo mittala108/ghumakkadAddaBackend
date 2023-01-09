@@ -2,7 +2,6 @@ const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
 const Backpacking_Trip_Tour_Guide_Info=require('../../models/Backpacking_Trip/backpacking_trip_tour_guide_info');
-const backpacking_trip_travel_mode = require('../../models/Backpacking_Trip/backpacking_trip_travel_mode');
 
 router.get('/get_backpacking_trip_tour_guide_info',(req,res)=>{
 
@@ -110,7 +109,7 @@ router.update('/update_backpacking_trip_tour_guide_info/:user_ns',(req,res)=>{
         }
         else
         {
-            Backpacking_Trip_Tour_Guide_Info.update({phone_number:req.body.phone_number,email:req.body.email},{user_ns:req.params.user_ns})
+            Backpacking_Trip_Tour_Guide_Info.updateOne({phone_number:req.body.phone_number,email:req.body.email},{user_ns:req.params.user_ns})
             .exec()
             .then(result1=>{
                 res.json({
@@ -149,6 +148,14 @@ router.patch('/update_backpacking_trip_tour_guide_info',(req,res)=>{
     });
 });
 
+router.delete('/delete_backpacking_trip_tour_guide_info',(req,res)=>{
+
+    Backpacking_Trip_Tour_Guide_Info.deleteOne({_id:req.body.backpacking_trip_tour_guide_info})
+    .exec()
+    .then(result=>{
+        console.log('tour guide info deleted');
+    });
+});
 
 router.get('/get_backpacking_trip_tour_guide_info/:package_id',(req,res)=>{
     Backpacking_Trip_Tour_Guide_Info.find({

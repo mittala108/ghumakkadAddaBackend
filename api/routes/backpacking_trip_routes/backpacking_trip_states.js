@@ -19,6 +19,7 @@ const storage=multer.diskStorage({
 
 const upload=multer({storage:storage});
 
+//route for uchat
 router.get('/get_backpacking_trip_states',(req,res)=>{
 
     Backpacking_Trip_State.find({is_available:1})
@@ -36,6 +37,7 @@ router.get('/get_backpacking_trip_states',(req,res)=>{
     });
 });
 
+//route for admin panel
 router.get('/get_backpacking_trip_states_for_admin_panel',(req,res)=>{
 
     Backpacking_Trip_State.find()
@@ -113,6 +115,11 @@ router.delete('/delete_backpacking_trip_state_image',(req,res)=>{
         const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
         filePath.unlinkSync(filePath);
         console.log('state image deleted');
+        Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{state_image_path:''})
+        .exec()
+        .then(result1=>{
+            console.log('state_image_path data deleted from database');
+        })
     })
     .catch(err=>{
         res.json({

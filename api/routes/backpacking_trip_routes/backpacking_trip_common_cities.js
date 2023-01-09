@@ -37,6 +37,7 @@ router.get('/get_backpacking_trip_common_cities/:backpacking_trip_state_id',(req
     });
 });
 
+
 //route for retool admin panel
 router.get('/get_backpacking_trip_common_cities',(req,res)=>{
 
@@ -117,6 +118,11 @@ router.delete('/delete_backpacking_trip_common_cti_image',(req,res)=>{
         const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.common_city_image_path);
         fs.unlinkSync(filePath);
         console.log('common_city_image_deleted');
+        Backpacking_Trip_Common_City.updateOne({_id:req.body.backpacking_trip_common_city_id},{common_city_image_path:''})
+        .exec()
+        .then(result=>{
+            console.log('common city image path data is deleted from database');
+        });
     })
     .catch(err=>{
         res.json({
