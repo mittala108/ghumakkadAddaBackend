@@ -10,7 +10,8 @@ const backpacking_trip_package=mongoose.Schema({
     package_name:{type:String},
     package_description:{type:String},
     package_number_of_days:{type:String},
-    period:{type:String,default:'new'},
+    is_available:{type:Boolean,default:1},
+    package_offered_by:{type:String},
     extra_data_in_object_type:{type:mongoose.Schema.Types.Mixed,default:{}},
     extra_data_in_array_type:{type:Array,default:[]}
 

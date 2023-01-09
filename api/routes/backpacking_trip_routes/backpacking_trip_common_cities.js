@@ -22,7 +22,7 @@ const upload=multer({storage:storage});
 //route for uchat
 router.get('/get_backpacking_trip_common_cities/:backpacking_trip_state_id',(req,res)=>{
 
-    Backpacking_Trip_Common_City.find({backpacking_trip_state_id:req.params.backpacking_trip_state_id})
+    Backpacking_Trip_Common_City.find({backpacking_trip_state_id:req.params.backpacking_trip_state_id,is_available:1})
     .exec()
     .then(result=>{
         res.json({
@@ -91,7 +91,10 @@ router.patch('/update_backpacking_trip_common_city',upload.single('common_city_i
         console.log(filePath);
         fs.unlinkSync(`${filePath}`);
         console.log('old state image deleted');
-        Backpacking_Trip_Common_City.updateOne({_id:req.body.backpacking_trip_common_city_id},{common_city_image_path:req.file.path})
+        Backpacking_Trip_Common_City.updateOne({_id:req.body.backpacking_trip_common_city_id},{
+            common_city_image_path:req.file.path,
+            is_available:req.body.is_available
+        })
         .exec()
         .then(result1=>{
             res.json({
@@ -104,26 +107,23 @@ router.patch('/update_backpacking_trip_common_city',upload.single('common_city_i
             error:err
         });
     });
-})
+});
 
-   
+router.delete('/delete_backpacking_trip_common_cti_image',(req,res)=>{
+    Backpacking_Trip_Common_City.findOne({_id:req.body.backpacking_trip_common_city_id})
+    .exec()
+    .then(result=>{
 
-// router.delete('/delete_backpacking_trip_common_city',(req,res)=>{
+        const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.common_city_image_path);
+        fs.unlinkSync(filePath);
+        console.log('common_city_image_deleted');
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
 
-//     Backpacking_Trip_Common_City.deleteOne({_id:req.params.backpacking_trip_common_city_id})
-//     .exec()
-//     .then(result=>{
-//         res.json({
-//             message:'city has been deleted'
-//         });
-//     })
-//     .catch(err=>{
-//         res.json({
-//             error:err
-//         });
-//     });
-// });
-
-
+});
 
 module.exports=router;

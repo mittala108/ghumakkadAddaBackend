@@ -21,7 +21,7 @@ const upload=multer({storage:storage});
 //route for uchat
 router.get('/get_backpacking_trip_packages/:backpacking_trip_travel_mode_id',(req,res)=>{
 
-    Backpacking_Trip_Package.find({backpacking_trip_travel_mode_id:req.params.backpacking_trip_travel_mode_id,period:'new'})
+    Backpacking_Trip_Package.find({backpacking_trip_travel_mode_id:req.params.backpacking_trip_travel_mode_id,is_available:1})
     .exec()
     .then(result=>{
         res.json({
@@ -85,7 +85,8 @@ router.post('/post_backpacking_trip_package',upload.fields([{name:'package_front
         package_details_pdf_path:req.files.package_details_pdf[0].path,
         package_name:req.body.package_name,
         package_description:req.body.package_description,
-        package_number_of_days:req.body.package_number_of_days
+        package_number_of_days:req.body.package_number_of_days,
+        package_offered_by:req.body.package_offered_by
     });
 
     newData.save()
@@ -102,5 +103,69 @@ router.post('/post_backpacking_trip_package',upload.fields([{name:'package_front
     });
 });
 
+router.patch('/update_backpacking_trip_package',upload.fields([{name:'package_front_image',maxCount:1},{name:'package_details_pdf',maxCount:1}]),(req,res)=>{
+
+    Backpacking_Trip_Package.findOne({_id:req.body.backpacking_trip_package_id})
+    .exec()
+    .then(result=>{
+
+        const imagePath=String(path.dirname(require.main.filename))+'\\'+String(result.package_front_image_path);
+        const pdfPath=String(path.dirname(require.main.filename))+'\\'+String(result.package_details_pdf_path);
+
+        fs.unlinkSync(imagePath);
+        fs.unlinkSync(pdfPath);
+
+        console.log('old image and pdf deleted');
+
+        Backpacking_Trip_Package.updateOne({_id:req.body.backpacking_trip_package_id},{
+            package_front_image_path:req.file.package_front_image[0].path,
+            package_details_pdf_path:req.files.package_details_pdf[0].path,
+            package_details_web_url:req.body.package_details_web_url,
+            package_name:req.body.package_name,
+            package_description:req.body.package_description,
+            package_number_of_days:req.body.package_number_of_days,
+            is_available:req.body.is_available,
+            package_offered_by:req.body.package_offered_by
+        })
+        .exec()
+        .then(result1=>{
+            res.json({
+                message:'data updated',
+                data:result1
+
+            });
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+    
+});
+
+
+router.delete('/delete_backpacking_trip_package_image_and_pdf_file',(req,res)=>{
+
+    Backpacking_Trip_Package.findOne({_id:req.body.backpacking_trip_package_id})
+    .exec()
+    .then(result=>{
+
+        const imagePath=String(path.dirname(require.main.filename))+'\\'+String(result.package_front_image_path);
+        const pdfPath=String(path.dirname(require.main.filename))+'\\'+String(result.package_details_pdf_path);
+
+        fs.unlinkSync(imagePath);
+        fs.unlinkSync(pdfPath);
+
+        console.log('old image and pdf deleted');
+        
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+
+});
 
 module.exports=router;

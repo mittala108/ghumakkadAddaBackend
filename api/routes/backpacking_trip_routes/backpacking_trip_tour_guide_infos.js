@@ -2,6 +2,7 @@ const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
 const Backpacking_Trip_Tour_Guide_Info=require('../../models/Backpacking_Trip/backpacking_trip_tour_guide_info');
+const backpacking_trip_travel_mode = require('../../models/Backpacking_Trip/backpacking_trip_travel_mode');
 
 router.get('/get_backpacking_trip_tour_guide_info',(req,res)=>{
 
@@ -94,6 +95,58 @@ router.post('/post_backpacking_trip_tour_guide_info',(req,res)=>{
         });
     });
 
+});
+
+router.update('/update_backpacking_trip_tour_guide_info/:user_ns',(req,res)=>{
+
+    Backpacking_Trip_Tour_Guide_Info.find({phone_number:req.body.phone_number,email:req.body.email})
+    .exec()
+    .then(result=>{
+        if(result.length==0)
+        {
+            res.json({
+                message:'sorry! your information is not verified'
+            });
+        }
+        else
+        {
+            Backpacking_Trip_Tour_Guide_Info.update({phone_number:req.body.phone_number,email:req.body.email},{user_ns:req.params.user_ns})
+            .exec()
+            .then(result1=>{
+                res.json({
+                    message:'Your Data has been verified',
+                    data:result1
+                });
+            });
+        }
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
+
+router.patch('/update_backpacking_trip_tour_guide_info',(req,res)=>{
+
+    Backpacking_Trip_Tour_Guide_Info.updateOne({_id:req.body.backpacking_trip_tour_guide_id},{
+        phone_number:req.body.phone_number,
+        email:req.body.email,
+        webhook_url:req.body.webhook_url,
+        user_ns:req.body.user_ns
+
+    })
+    .exec()
+    .then(result=>{
+        res.json({
+            message:'data updated successfully'
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
 });
 
 
