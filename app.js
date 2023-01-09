@@ -45,7 +45,7 @@ app.get('/experiment',(req,res)=>{
 });
 
 app.use('/api',sub_routes);
-app.use('/adminPanelAdminBro',adminRouter);
+app.use('/admin',adminRouter);
 
 
 
