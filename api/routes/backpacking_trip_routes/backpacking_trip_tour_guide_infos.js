@@ -96,7 +96,8 @@ router.post('/post_backpacking_trip_tour_guide_info',(req,res)=>{
 
 });
 
-router.patch('/update_backpacking_trip_tour_guide_info/:user_ns',(req,res)=>{
+//update
+router.post('/update_backpacking_trip_tour_guide_info/:user_ns',(req,res)=>{
 
     Backpacking_Trip_Tour_Guide_Info.find({phone_number:req.body.phone_number,email:req.body.email})
     .exec()
@@ -126,6 +127,7 @@ router.patch('/update_backpacking_trip_tour_guide_info/:user_ns',(req,res)=>{
     });
 });
 
+//update
 router.patch('/update_backpacking_trip_tour_guide_info',(req,res)=>{
 
     Backpacking_Trip_Tour_Guide_Info.updateOne({_id:req.body.backpacking_trip_tour_guide_id},{

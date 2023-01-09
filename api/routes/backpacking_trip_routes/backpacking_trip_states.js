@@ -81,25 +81,46 @@ router.post('/post_backpacking_trip_state',upload.single('state_image'),(req,res
     });
 });
 
-router.patch('/update_backpacking_trip_state',upload.single('state_image'),(req,res)=>{
+
+//update
+router.post('/update_backpacking_trip_state',upload.single('state_image'),(req,res)=>{
 
     Backpacking_Trip_State.findOne({_id:req.body.backpacking_trip_state_id})
     .exec()
     .then(result=>{
-        const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
-        console.log(filePath);
-        fs.unlinkSync(`${filePath}`);
-        console.log('old state image deleted');
-        Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{
-            state_image_path:req.file.path,
-            is_available:req.body.is_available
-        })
-        .exec()
-        .then(result1=>{
-            res.json({
-                message:'Data updated'
+       
+        if(req.file==undefined)
+        {
+            Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{
+                is_available:req.body.is_available
+            })
+            .exec()
+            .then(result1=>{
+                res.json({
+                    message:'Data updated'
+                });
             });
-        });
+
+        }
+        else
+        {
+            const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
+            console.log(filePath);
+            fs.unlinkSync(`${filePath}`);
+            console.log('old state image deleted');
+            Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{
+                state_image_path:req.file.path,
+                is_available:req.body.is_available
+            })
+            .exec()
+            .then(result1=>{
+                res.json({
+                    message:'Data updated'
+                });
+            });
+
+        }
+        
     })
     .catch(err=>{
         res.json({
