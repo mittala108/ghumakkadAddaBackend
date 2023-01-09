@@ -5,7 +5,7 @@ const Backpacking_Trip_State=require('../../models/Backpacking_Trip/backpacking_
 const multer=require('multer');
 const fs=require('fs');
 const path = require('path');
-const { findOne } = require('../../models/Backpacking_Trip/backpacking_trip_state');
+
 
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
@@ -63,7 +63,8 @@ router.post('/post_backpacking_trip_state',upload.single('state_image'),(req,res
 
         _id:mongoose.Types.ObjectId(),
         state:req.body.state,
-        state_image_path:req.file.path
+        state_image_path:req.file.path,
+        is_available:req.body.is_available
     });
 
     newData.save()
@@ -113,7 +114,7 @@ router.delete('/delete_backpacking_trip_state_image',(req,res)=>{
     .exec()
     .then(result=>{
         const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
-        filePath.unlinkSync(filePath);
+        fs.unlinkSync(filePath);
         console.log('state image deleted');
         Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{state_image_path:''})
         .exec()
