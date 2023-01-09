@@ -108,11 +108,11 @@ router.patch('/update_backpacking_trip_state',upload.single('state_image'),(req,
     });
 });
 
-router.delete('/delete_backpacking_trip_state_image',(req,res)=>{
+router.delete('/delete_backpacking_trip_state_image/:backpacking_trip_state_id',(req,res)=>{
 
     console.log('here');
 
-    Backpacking_Trip_State.findOne({_id:req.body.backpacking_trip_state_id})
+    Backpacking_Trip_State.findOne({_id:req.params.backpacking_trip_state_id})
     .exec()
     .then(result=>{
         console.log(result);
