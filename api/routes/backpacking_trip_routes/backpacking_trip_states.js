@@ -110,10 +110,14 @@ router.patch('/update_backpacking_trip_state',upload.single('state_image'),(req,
 
 router.delete('/delete_backpacking_trip_state_image',(req,res)=>{
 
+    console.log('here');
+
     Backpacking_Trip_State.findOne({_id:req.body.backpacking_trip_state_id})
     .exec()
     .then(result=>{
+        console.log(result);
         const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
+        console.log(filePath);
         fs.unlinkSync(filePath);
         console.log('state image deleted');
         Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{state_image_path:''})
