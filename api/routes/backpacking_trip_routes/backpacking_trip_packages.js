@@ -145,9 +145,9 @@ router.patch('/update_backpacking_trip_package',upload.fields([{name:'package_fr
 });
 
 
-router.delete('/delete_backpacking_trip_package_image_and_pdf_file',(req,res)=>{
+router.delete('/delete_backpacking_trip_package_image_and_pdf_file/:backpacking_trip_package_id',(req,res)=>{
 
-    Backpacking_Trip_Package.findOne({_id:req.body.backpacking_trip_package_id})
+    Backpacking_Trip_Package.findOne({_id:req.params.backpacking_trip_package_id})
     .exec()
     .then(result=>{
 
@@ -158,7 +158,7 @@ router.delete('/delete_backpacking_trip_package_image_and_pdf_file',(req,res)=>{
         fs.unlinkSync(pdfPath);
 
         console.log('old image and pdf deleted');
-        Backpacking_Trip_Package.updateOne({_id:req.body.backpacking_trip_package_id},{package_front_image_path:'',package_details_pdf_path:''})
+        Backpacking_Trip_Package.updateOne({_id:req.params.backpacking_trip_package_id},{package_front_image_path:'',package_details_pdf_path:''})
         .exec()
         .then(result=>{
             console.log('package front image and pdf path data deleted from database');

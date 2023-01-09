@@ -148,9 +148,9 @@ router.patch('/update_backpacking_trip_tour_guide_info',(req,res)=>{
     });
 });
 
-router.delete('/delete_backpacking_trip_tour_guide_info',(req,res)=>{
+router.delete('/delete_backpacking_trip_tour_guide_info/:backpacking_trip_tour_guide_info',(req,res)=>{
 
-    Backpacking_Trip_Tour_Guide_Info.deleteOne({_id:req.body.backpacking_trip_tour_guide_info})
+    Backpacking_Trip_Tour_Guide_Info.deleteOne({_id:req.params.backpacking_trip_tour_guide_info})
     .exec()
     .then(result=>{
         console.log('tour guide info deleted');

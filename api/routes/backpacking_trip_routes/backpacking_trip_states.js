@@ -120,7 +120,7 @@ router.delete('/delete_backpacking_trip_state_image/:backpacking_trip_state_id',
         console.log(filePath);
         fs.unlinkSync(filePath);
         console.log('state image deleted');
-        Backpacking_Trip_State.updateOne({_id:req.body.backpacking_trip_state_id},{state_image_path:''})
+        Backpacking_Trip_State.updateOne({_id:req.params.backpacking_trip_state_id},{state_image_path:''})
         .exec()
         .then(result1=>{
             console.log('state_image_path data deleted from database');
