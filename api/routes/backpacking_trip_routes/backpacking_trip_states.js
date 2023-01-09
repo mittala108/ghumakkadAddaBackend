@@ -116,7 +116,7 @@ router.delete('/delete_backpacking_trip_state_image/:backpacking_trip_state_id',
     .exec()
     .then(result=>{
         console.log(result);
-        const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
+        const filePath=String(path.dirname(require.main.filename))+'/'+String(result.state_image_path);
         console.log(filePath);
         fs.unlinkSync(filePath);
         console.log('state image deleted');
