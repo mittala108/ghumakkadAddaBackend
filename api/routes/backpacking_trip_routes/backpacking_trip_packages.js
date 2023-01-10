@@ -133,7 +133,7 @@ router.post('/update_backpacking_trip_package',upload.fields([{name:'package_fro
 
         else if(req.files.package_front_image[0]==undefined && req.files.package_details_pdf[0]!=undefined)
         {
-            const pdfPath=String(path.dirname(require.main.filename))+'\\'+String(result.package_details_pdf_path);
+            const pdfPath=String(path.dirname(require.main.filename))+'/'+String(result.package_details_pdf_path);
 
             fs.unlinkSync(pdfPath);
 
@@ -161,7 +161,7 @@ router.post('/update_backpacking_trip_package',upload.fields([{name:'package_fro
 
         else if(req.files.package_front_image[0]!=undefined && req.files.package_details_pdf[0]==undefined)
         {
-            const imagePath=String(path.dirname(require.main.filename))+'\\'+String(result.package_front_image_path);
+            const imagePath=String(path.dirname(require.main.filename))+'/'+String(result.package_front_image_path);
 
             fs.unlinkSync(imagePath);
 
@@ -188,8 +188,8 @@ router.post('/update_backpacking_trip_package',upload.fields([{name:'package_fro
         }
         else if(req.files.package_front_image[0]!=undefined && req.files.package_details_pdf[0]!=undefined)
         {
-            const imagePath=String(path.dirname(require.main.filename))+'\\'+String(result.package_front_image_path);
-            const pdfPath=String(path.dirname(require.main.filename))+'\\'+String(result.package_details_pdf_path);
+            const imagePath=String(path.dirname(require.main.filename))+'/'+String(result.package_front_image_path);
+            const pdfPath=String(path.dirname(require.main.filename))+'/'+String(result.package_details_pdf_path);
 
             fs.unlinkSync(imagePath);
             fs.unlinkSync(pdfPath);

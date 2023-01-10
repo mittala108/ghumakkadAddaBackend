@@ -19,6 +19,7 @@ const storage=multer.diskStorage({
 
 const upload=multer({storage:storage});
 
+
 //route for uchat
 router.get('/get_backpacking_trip_states',(req,res)=>{
 
@@ -85,6 +86,8 @@ router.post('/post_backpacking_trip_state',upload.single('state_image'),(req,res
 //update
 router.post('/update_backpacking_trip_state',upload.single('state_image'),(req,res)=>{
 
+
+
     Backpacking_Trip_State.findOne({_id:req.body.backpacking_trip_state_id})
     .exec()
     .then(result=>{
@@ -104,7 +107,7 @@ router.post('/update_backpacking_trip_state',upload.single('state_image'),(req,r
         }
         else
         {
-            const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.state_image_path);
+            const filePath=String(path.dirname(require.main.filename))+'/'+String(result.state_image_path);
             console.log(filePath);
             fs.unlinkSync(`${filePath}`);
             console.log('old state image deleted');

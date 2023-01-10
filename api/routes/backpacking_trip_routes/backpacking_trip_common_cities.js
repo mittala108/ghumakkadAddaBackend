@@ -92,7 +92,6 @@ router.post('/update_backpacking_trip_common_city',upload.single('common_city_im
         if(req.file==undefined)
         {
             Backpacking_Trip_Common_City.updateOne({_id:req.body.backpacking_trip_common_city_id},{
-                common_city_image_path:req.file.path,
                 is_available:req.body.is_available
             })
             .exec()
@@ -105,7 +104,7 @@ router.post('/update_backpacking_trip_common_city',upload.single('common_city_im
         }
 
         else{
-            const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.common_city_image_path);
+            const filePath=String(path.dirname(require.main.filename))+'/'+String(result.common_city_image_path);
             console.log(filePath);
             fs.unlinkSync(`${filePath}`);
             console.log('old state image deleted');
