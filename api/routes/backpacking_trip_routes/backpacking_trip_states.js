@@ -14,7 +14,7 @@ const storage=multer.diskStorage({
 
     filename:function(req,file,cb){
         cb(null,file.originalname);
-    }
+    } 
 });
 
 const upload=multer({storage:storage});
@@ -148,7 +148,10 @@ router.delete('/delete_backpacking_trip_state_image/:backpacking_trip_state_id',
         .exec()
         .then(result1=>{
             console.log('state_image_path data deleted from database');
-        })
+            res.json({
+                message:'image is deleted'
+            });
+        });
     })
     .catch(err=>{
         res.json({

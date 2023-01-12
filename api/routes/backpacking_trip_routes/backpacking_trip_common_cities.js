@@ -135,7 +135,7 @@ router.delete('/delete_backpacking_trip_common_city_image/:backpacking_trip_comm
     .exec()
     .then(result=>{
 
-        const filePath=String(path.dirname(require.main.filename))+'\\'+String(result.common_city_image_path);
+        const filePath=String(path.dirname(require.main.filename))+'/'+String(result.common_city_image_path);
         fs.unlinkSync(filePath);
         console.log('common_city_image_deleted');
         Backpacking_Trip_Common_City.updateOne({_id:req.params.backpacking_trip_common_city_id},{common_city_image_path:''})

@@ -3,9 +3,6 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Backpacking_Trip_Package_Date=require('../../models/Backpacking_Trip/backpacking_trip_package_date');
 const Backpacking_Trip_Package_Cost=require('../../models/Backpacking_Trip/backpacking_trip_package_cost');
-const Backpacking_Trip_Group_Or_Solo_Travel=require('../../models/Backpacking_Trip/backpacking_trip_group_or_solo_travel');
-const scheduler=require('node-schedule');
-const { v4: uuidv4 } = require('uuid');
 const fetch=require('node-fetch');
 
 //route for uchat
@@ -227,17 +224,6 @@ router.delete('/delete_date_and_cost_from_database/:package_date_id',(req,res)=>
     })
     .catch(err=>{
         console.log(err);
-    })
-
-    Backpacking_Trip_Group_Or_Solo_Travel.deleteMany({backpacking_trip_package_date_id:req.params.backpacking_trip_package_date_id})
-    .exec()
-    .then(result=>{
-        res.json({
-            message:'travel group record deleted successfully'
-        });
-    })
-    .catch(err=>{
-        console.log(err)
     })
 
 });

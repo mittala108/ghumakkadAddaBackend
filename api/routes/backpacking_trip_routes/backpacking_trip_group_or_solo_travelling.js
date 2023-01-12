@@ -10,10 +10,8 @@ router.get('/get_backpacking_trip_group_or_solo_travelling',(req,res)=>{
 
     Backpacking_Trip_Group_Or_Solo_Travel.find()
     .populate({
-        path:'backpacking_trip_package_date_id',
-        populate:{
+       
             path:'backpacking_trip_package_id',
-            model:'Backpacking_Trip_Package',
             populate:{
                 path:'backpacking_trip_travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
@@ -26,7 +24,6 @@ router.get('/get_backpacking_trip_group_or_solo_travelling',(req,res)=>{
                     }
                 }         
             }
-        }
 })
     .exec()
     .then(result=>{
@@ -44,9 +41,9 @@ router.get('/get_backpacking_trip_group_or_solo_travelling',(req,res)=>{
     });
 });
 
-router.get('get_backpacking_trip_group_or_solo_travelling/:backpacking_trip_package_date_id',(req,res)=>{
+router.get('get_backpacking_trip_group_or_solo_travelling/:backpacking_trip_package_id',(req,res)=>{
 
-    Backpacking_Trip_Group_Or_Solo_Travel.find({backpacking_trip_package_date_id:req.params.backpacking_trip_package_date_id})
+    Backpacking_Trip_Group_Or_Solo_Travel.find({backpacking_trip_package_id:req.params.backpacking_trip_package_id})
     .exec()
     .then(result=>{
         res.json({
@@ -66,7 +63,7 @@ router.post('/post_backpacking_trip_group_or_solo_travel',(req,res)=>{
 
     const newData=new Backpacking_Trip_Group_Or_Solo_Travel({
 
-        backpacking_trip_package_date_id:req.body.backpacking_trip_package_date_id,
+        backpacking_trip_package_id:req.body.backpacking_trip_package_id,
         travel_grouping:req.body.travel_grouping
     });
 
@@ -75,6 +72,22 @@ router.post('/post_backpacking_trip_group_or_solo_travel',(req,res)=>{
         res.json({
             data:result,
             message:'data saved successfully'
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
+
+router.delete('/delete_backpacking_trip_group_or_solo_travel/:backpacking_trip_group_or_solo_travel_id',(req,res)=>{
+
+    Backpacking_Trip_Group_Or_Solo_Travel.findOne({_id:req.params.backpacking_trip_group_or_solo_travel_id})
+    .exec()
+    .then(result=>{
+        res.json({
+            message:'backpacking_trip_group_or_solo_travel data deleted'
         });
     })
     .catch(err=>{

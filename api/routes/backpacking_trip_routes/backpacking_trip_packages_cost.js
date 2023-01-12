@@ -11,7 +11,7 @@ router.post('/post_backpacking_trip_package_cost',(req,res)=>{
         _id:mongoose.Types.ObjectId(),
         backpacking_trip_package_date_id:req.body.backpacking_trip_package_date_id,
         date_of_journey:req.body.date_of_journey,
-        group_or_solo_travel:req.body.group_or_solo_travel,
+        backpacking_trip_group_or_solo_travel_id:req.body.backpacking_trip_group_or_solo_travel_id,
         package_cost:req.body.package_cost
 
     });
@@ -32,8 +32,11 @@ router.post('/post_backpacking_trip_package_cost',(req,res)=>{
 })
 
 
-router.get('/get_backpacking_trip_packages_cost/:backpacking_trip_package_date_id',(req,res)=>{
-    Backpacking_Trip_Package_Cost.find({backpacking_trip_package_date_id:req.params.backpacking_trip_package_date_id})
+router.get('/get_backpacking_trip_packages_cost/:backpacking_trip_package_date_id/:backpacking_trip_group_or_solo_travel_id',(req,res)=>{
+    Backpacking_Trip_Package_Cost.find({
+        backpacking_trip_package_date_id:req.params.backpacking_trip_package_date_id,
+        backpacking_trip_group_or_solo_travel_id:req.params.backpacking_trip_group_or_solo_travel_id
+    })
     .exec()
     .then(result=>{
         res.json({
@@ -56,6 +59,25 @@ router.get('/get_backpacking_trip_packages_cost',(req,res)=>{
     Backpacking_Trip_Package_Cost.find()
     .populate({
         path:'backpacking_trip_package_date_id',
+        populate:{
+            path:'backpacking_trip_package_id',
+            model:'Backpacking_Trip_Package',
+            populate:{
+                path:'backpacking_trip_travel_mode_id',
+                model:'Backpacking_Trip_Travel_Mode',
+                populate:{
+                    path:'backpacking_trip_common_city_id',
+                    model:'Backpacking_Trip_Common_City',
+                    populate:{
+                        path:'backpacking_trip_state_id',
+                        model:'Backpacking_Trip_State'
+                    }
+                }         
+            }
+        }
+    })
+    .populate({
+        path:'backpacking_trip_group_or_solo_travel_id',
         populate:{
             path:'backpacking_trip_package_id',
             model:'Backpacking_Trip_Package',

@@ -6,7 +6,6 @@ const mongoose=require('mongoose');
 const cors=require('cors');
 const sub_routes=require('./api/routes/sub_routes');
 const adminRouter=require('./api/routes/admin.router');
-const scheduler=require('node-schedule');
 require('dotenv').config();
 const { v4: uuidv4 } = require('uuid');
 var randomstring = require("randomstring");
@@ -25,7 +24,7 @@ app.use(bodyParser.json());
 
 app.use(cors({
     origin:"*",
-}))
+}));
 
 
 app.get('/uploads/:filename',(req,res)=>{
@@ -33,7 +32,7 @@ app.get('/uploads/:filename',(req,res)=>{
      return res.sendFile(__dirname+'/uploads/'+req.params.filename);
 });
 
-app.get('/experiment',(req,res)=>{
+app.post('/experiment',(req,res)=>{
 
     const actual_user_booking_id='GA'+String(randomstring.generate({
         length:12,

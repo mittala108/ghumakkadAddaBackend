@@ -13,7 +13,7 @@ const backpacking_trip_user_booking_detail=mongoose.Schema({
     travel_mode:{type:String},
     backpacking_trip_package_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Package'},
     date_of_journey:{type:Date},
-    travel_grouping:{type:String},
+    group_or_solo_travel:{type:String},
     no_of_bookings:{type:Number},
     total_amount_paid:{type:Number},
     cost_of_package:{type:Number},

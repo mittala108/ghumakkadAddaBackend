@@ -70,7 +70,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
         travel_mode:req.body.travel_mode,
         backpacking_trip_package_id:req.body.backpacking_trip_package_id,
         date_of_journey:date_of_journey,
-        travel_grouping:req.body.travel_grouping,
+        group_or_solo_travel:req.body.group_or_solo_travel,
         no_of_bookings:req.body.no_of_bookings,
         total_amount_paid:req.body.total_amount_paid,
         cost_of_package:req.body.cost_of_package,
