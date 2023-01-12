@@ -41,7 +41,7 @@ router.get('/get_backpacking_trip_group_or_solo_travelling',(req,res)=>{
     });
 });
 
-router.get('get_backpacking_trip_group_or_solo_travelling/:backpacking_trip_package_id',(req,res)=>{
+router.get('/get_backpacking_trip_group_or_solo_travelling/:backpacking_trip_package_id',(req,res)=>{
 
     Backpacking_Trip_Group_Or_Solo_Travel.find({backpacking_trip_package_id:req.params.backpacking_trip_package_id})
     .exec()
