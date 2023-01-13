@@ -83,7 +83,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 console.log('i am here 1');
                 const newDate=30;
                 const newMonth=getMonth-1;
-                const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
+                const date1 = new Date(getFullYear,newMonth,newDate,10, 30, 00);
                 console.log(date1);
                 fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -95,7 +95,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
             {
                 console.log('i am here 11');
                 const newDate=getDate-1;
-                const date1=new Date(getFullYear,getMonth,newDate,16,00,00);
+                const date1=new Date(getFullYear,getMonth,newDate,10,30,00);
                 console.log(date1);
                 fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -111,7 +111,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 console.log('i am here 2');
                 const newDate=31;
                 const newMonth=getMonth-1;
-                const date1 = new Date(getFullYear,newMonth,newDate,16,00,00);
+                const date1 = new Date(getFullYear,newMonth,newDate,10,30,00);
                 console.log(date1);  
                 fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -123,7 +123,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
             {
                 console.log('i am here 22');
                 const newDate=getDate-1;
-                const date1=new Date(getFullYear,getMonth,newDate,16,00,00);
+                const date1=new Date(getFullYear,getMonth,newDate,10,30,00);
                 console.log(date1);
                 fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -141,7 +141,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
             
                 const newDate=29;
                 const newMonth=getMonth-1;
-                const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
+                const date1 = new Date(getFullYear,newMonth,newDate,10, 30, 00);
                 console.log(date1); 
                 fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -153,7 +153,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
                 console.log('i am here 3');
                 const newDate=28;
                 const newMonth=getMonth-1;
-                const date1 = new Date(getFullYear,newMonth,newDate,16, 00, 00);
+                const date1 = new Date(getFullYear,newMonth,newDate,10,30, 00);
                 console.log(date1);   
                 fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -169,7 +169,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
             const newDate=31;
             const newMonth=11;
             const newFullYear=getFullYear-1;
-            const date1 = new Date(newFullYear,newMonth,newDate,16, 00, 00);
+            const date1 = new Date(newFullYear,newMonth,newDate,10, 30, 00);
             console.log(date1);
             fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'
@@ -181,7 +181,7 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
         {
             console.log('i am here 6');
             const newDate=getDate-1;
-            const date1 = new Date(getFullYear,getMonth,newDate,16,00,00);
+            const date1 = new Date(getFullYear,getMonth,newDate,10,30,00);
             console.log(date1);   
             fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${result._id}`,{
                     method:'GET'

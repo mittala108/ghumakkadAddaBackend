@@ -93,7 +93,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
             {
                 const newDate=number_nm-31;
                 const newMonth=getMonth+1;
-                const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
+                const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                 console.log(date1);
                 console.log('1');
                 
@@ -104,7 +104,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
 
             else if(number_nm<=31)
             {
-                const date1 = new Date(getFullYear,getMonth,number_nm,12,00,00);
+                const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                 console.log(date1);
                 console.log('2');
                 fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -121,7 +121,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
             {
                 const newDate=number_nm-30;
                 const newMonth=getMonth+1;
-                const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
+                const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                 console.log(date1);
                 console.log('3');
                 fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -131,7 +131,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
 
             else if(number_nm<=30)
             {
-                const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
+                const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                 console.log(date1);
                 console.log('4');
                 fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -150,7 +150,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     {
                         const newDate=number_nm-29;
                         const newMonth=getMonth+1;
-                        const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
+                        const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                         console.log(date1);
                         console.log('7');
                         fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -162,7 +162,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     {
 
             
-                        const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
+                        const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                         console.log(date1);
                         console.log('8');
                         fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -178,7 +178,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 {
                     const newDate=number_nm-28;
                     const newMonth=getMonth+1;
-                    const date1 = new Date(getFullYear,newMonth,newDate,12, 00, 00);
+                    const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                     console.log(date1);
                     console.log('5');
                     fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -188,7 +188,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
     
                 else if(number_nm<=28)
                 {    
-                    const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
+                    const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                     console.log(date1);
                     console.log('6');
                     fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -208,7 +208,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     const newDate=number_nm-31;
                     const newMonth=0;
                     const newFullYear=getFullYear+1;
-                    const date1 = new Date(newFullYear,newMonth,newDate,12, 00, 00);
+                    const date1 = new Date(newFullYear,newMonth,newDate,6, 30, 00);
                     console.log(date1);
                     console.log('9');
                     fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
@@ -218,7 +218,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
     
                 else if(number_nm<=31)
                 {    
-                    const date1 = new Date(getFullYear,getMonth,number_nm,12, 00, 00);
+                    const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                     console.log(date1);
                     console.log('10');
                     const job=uuidv4();
