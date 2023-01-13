@@ -96,10 +96,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                 console.log(date1);
                 console.log('1');
-                
-                    fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                    });
+                schedulerJobCallFunction(date1,req.body.user_ns);
             }
 
             else if(number_nm<=31)
@@ -107,9 +104,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                 console.log(date1);
                 console.log('2');
-                fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                });
+                schedulerJobCallFunction(date1,req.body.user_ns);
 
             }
         }
@@ -124,9 +119,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                 console.log(date1);
                 console.log('3');
-                fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                });
+                schedulerJobCallFunction(date1,req.body.user_ns);
             }
 
             else if(number_nm<=30)
@@ -134,9 +127,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                 const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                 console.log(date1);
                 console.log('4');
-                fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                });
+                schedulerJobCallFunction(date1,req.body.user_ns);
 
             }
 
@@ -153,9 +144,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                         const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                         console.log(date1);
                         console.log('7');
-                        fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                            method:'GET'
-                        });
+                        schedulerJobCallFunction(date1,req.body.user_ns);
                     }
 
                 else if(number_nm<=29)
@@ -165,9 +154,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                         const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                         console.log(date1);
                         console.log('8');
-                        fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                            method:'GET'
-                        });
+                        schedulerJobCallFunction(date1,req.body.user_ns);
 
                     }
 
@@ -181,9 +168,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     const date1 = new Date(getFullYear,newMonth,newDate,6, 30, 00);
                     console.log(date1);
                     console.log('5');
-                    fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                    });
+                    schedulerJobCallFunction(date1,req.body.user_ns);
                 }
     
                 else if(number_nm<=28)
@@ -191,9 +176,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     const date1 = new Date(getFullYear,getMonth,number_nm,6, 30, 00);
                     console.log(date1);
                     console.log('6');
-                    fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                    });
+                    schedulerJobCallFunction(date1,req.body.user_ns);
     
                 }
                 
@@ -211,9 +194,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     const date1 = new Date(newFullYear,newMonth,newDate,6, 30, 00);
                     console.log(date1);
                     console.log('9');
-                    fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                    });
+                    schedulerJobCallFunction(date1,req.body.user_ns);
                 }
     
                 else if(number_nm<=31)
@@ -222,9 +203,7 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
                     console.log(date1);
                     console.log('10');
                     const job=uuidv4();
-                    fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${req.body.user_ns}`,{
-                        method:'GET'
-                    });
+                    schedulerJobCallFunction(date1,req.body.user_ns);
     
                 }           
         }
@@ -241,6 +220,13 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
     });
 
 });
+
+const schedulerJobCallFunction=(date1,user_ns)=>{
+
+    fetch(`http://65.1.3.56:9000/schedule_jobs/send_review_message_to_user_scheduler/send_review_message_backpacking_trip/${date1}/${user_ns}`,{
+        method:'GET'
+    });  
+}
 
 
 
