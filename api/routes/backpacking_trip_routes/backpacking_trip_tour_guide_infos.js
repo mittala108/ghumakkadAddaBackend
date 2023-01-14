@@ -78,7 +78,8 @@ router.post('/post_backpacking_trip_tour_guide_info',(req,res)=>{
         backpacking_trip_package_id:req.body.backpacking_trip_package_id,
         package_id:req.body.package_id,
         webhook_url:req.body.webhook_url,
-        user_ns:req.body.user_ns
+        user_ns:req.body.user_ns,
+        more_information:req.body.more_information
     });
 
     backpacking_trip_tour_guide_info.save()
@@ -134,7 +135,8 @@ router.patch('/update_backpacking_trip_tour_guide_info',(req,res)=>{
         phone_number:req.body.phone_number,
         email:req.body.email,
         webhook_url:req.body.webhook_url,
-        user_ns:req.body.user_ns
+        user_ns:req.body.user_ns,
+        more_information:req.body.more_information
 
     })
     .exec()
