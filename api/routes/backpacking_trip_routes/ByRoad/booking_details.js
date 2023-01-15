@@ -50,7 +50,7 @@ router.post('/post_booking_detail_fields',(req,res)=>{
     const package_no_of_days=String(req.body.package_no_of_days);
     const package_date=parseInt(package_no_of_days.charAt(3),10);
 
-    const actual_user_booking_id='GA'+String(randomstring.generate({
+    const actual_booking_id='GA'+String(randomstring.generate({
         length:12,
         charset:'numeric'
     }));
@@ -60,7 +60,7 @@ router.post('/post_booking_detail_fields',(req,res)=>{
         
         _id:mongoose.Types.ObjectId(),
         user_id:req.body.user_id,
-        booking_id:actual_user_booking_id,
+        booking_id:actual_booking_id,
         communication_channel:req.body.communication_channel,
         package_ref_id:req.body.package_ref_id,
         date_of_journey:date_of_journey,

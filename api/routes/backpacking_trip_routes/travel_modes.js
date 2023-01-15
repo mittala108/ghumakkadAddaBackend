@@ -21,6 +21,23 @@ router.get('/get_travel_modes_fields/:common_city_id',(req,res)=>{
     });
 });
 
+router.get('/get_travel_modes_fields_for_admin_panel/:common_city_id',(req,res)=>{
+
+    Travel_Mode.find({common_city_id:req.params.common_city_id})
+    .exec()
+    .then(result=>{
+        res.json({
+            data:result,
+            count:result.length
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
+
 //route for admin panel
 router.get('/get_travel_modes_fields',(req,res)=>{
 

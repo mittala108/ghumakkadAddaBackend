@@ -78,7 +78,6 @@ router.post('/post_tour_guide_info_fields',(req,res)=>{
         package_ref_id:req.body.package_ref_id,
         real_package_id:req.body.real_package_id,
         webhook_url:req.body.webhook_url,
-        user_ns:req.body.user_ns,
         more_information:req.body.more_information
     });
 
