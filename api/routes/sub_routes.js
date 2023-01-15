@@ -4,15 +4,11 @@ const router=express.Router();
 //Backpacking_Trip
 const backpacking_trip_states=require('./backpacking_trip_routes/backpacking_trip_states');
 const backpacking_trip_common_cities=require('./backpacking_trip_routes/backpacking_trip_common_cities');
-const backpacking_trip_packages=require('./backpacking_trip_routes/backpacking_trip_packages');
-const backpacking_trip_package_dates=require('./backpacking_trip_routes/backpacking_trip_package_dates');
-const backpacking_trip_total_bookings_on_a_particular_date=require('./backpacking_trip_routes/backpacking_trip_total_bookings_on_a_particular_date');
-const backpacking_trip_tour_guide_infos=require('./backpacking_trip_routes/backpacking_trip_tour_guide_infos');
-const backpacking_trip_users_booking_detail=require('./backpacking_trip_routes/backpacking_trip_users_booking_detail');
-const backpacking_trip_payment_details=require('./backpacking_trip_routes/backpacking_trip_payment_details');
-const backpacking_trip_packages_cost=require('./backpacking_trip_routes/backpacking_trip_packages_cost');
-const backpacking_trip_group_or_solo_travelling=require('./backpacking_trip_routes/backpacking_trip_group_or_solo_travelling');
 const backpacking_trip_travel_modes=require('./backpacking_trip_routes/backpacking_trip_travel_modes');
+const backpacking_road_trip_routes=require('./backpacking_trip_routes/backpacking_trip_subroutes');
+
+
+
 
 
 //Bike_trip
@@ -49,15 +45,9 @@ const phone_number_verification=require('./verification_routes/phone_number_veri
 //backpacking_trip_related_routes
 router.use('/backpacking_trip_related_routes/backpacking_trip_common_cities',backpacking_trip_common_cities);
 router.use('/backpacking_trip_related_routes/backpacking_trip_states',backpacking_trip_states);
-router.use('/backpacking_trip_related_routes/backpacking_trip_packages',backpacking_trip_packages);
-router.use('/backpacking_trip_related_routes/backpacking_trip_package_dates',backpacking_trip_package_dates);
-router.use('/backpacking_trip_related_routes/backpacking_trip_total_bookings_on_a_particular_date',backpacking_trip_total_bookings_on_a_particular_date);
-router.use('/backpacking_trip_related_routes/backpacking_trip_tour_guide_infos',backpacking_trip_tour_guide_infos);
-router.use('/backpacking_trip_related_routes/backpacking_trip_users_booking_detail',backpacking_trip_users_booking_detail);
-router.use('/backpacking_trip_related_routes/backpacking_trip_payment_details',backpacking_trip_payment_details);
-router.use('/backpacking_trip_related_routes/backpacking_trip_packages_cost',backpacking_trip_packages_cost);
 router.use('/backpacking_trip_related_routes/backpacking_trip_travel_modes',backpacking_trip_travel_modes);
-router.use('/backpacking_trip_related_routes/backpacking_trip_group_or_solo_travelling',backpacking_trip_group_or_solo_travelling);
+router.use('/backpacking_trip_related_routes/by_road_travel_mode',backpacking_road_trip_routes);
+
 
 //bike_trip_routes
 router.use('/bike_trip_related_routes/bike_trip_copmmon_cities',bike_trip_common_cities);

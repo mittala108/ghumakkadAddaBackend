@@ -1,10 +1,10 @@
 const mongoose=require('mongoose');
 
-const backpacking_trip_tour_guide_info=mongoose.Schema({
+const backpacking_road_trip_tour_guide_info=mongoose.Schema({
 
     phone_number:{type:String},
     email:{type:String},
-    backpacking_trip_package_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Package'},
+    backpacking_road_trip_package_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Road_Trip_Package'},
     package_id:{type:String},
     webhook_url:{type:String,default:''},
     user_ns:{type:String,default:''},
@@ -15,4 +15,4 @@ const backpacking_trip_tour_guide_info=mongoose.Schema({
 
 
 
-module.exports=mongoose.model('Backpacking_Trip_Tour_Guide_Info',backpacking_trip_tour_guide_info);
+module.exports=mongoose.model('Backpacking_Road_Trip_Tour_Guide_Info',backpacking_road_trip_tour_guide_info);

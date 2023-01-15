@@ -1,17 +1,17 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Trip_User_Booking_Detail=require('../../models/Backpacking_Trip/backpacking_trip_user_booking_detail');
+const Backpacking_Road_Trip_User_Booking_Detail=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_user_booking_detail');
 const fetch=require('node-fetch');
 const scheduler=require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
 var randomstring = require("randomstring");
 
-router.get('/get_backpacking_trip_user_booking_details',(req,res)=>{
+router.get('/get_backpacking_road_trip_user_booking_details',(req,res)=>{
 
-    Backpacking_Trip_User_Booking_Detail.find()
+    Backpacking_Road_Trip_User_Booking_Detail.find()
     .populate({
-        path:'backpacking_trip_package_id',
+        path:'backpacking_road_trip_package_id',
             populate:{
                 path:'backpacking_trip_travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
@@ -41,7 +41,7 @@ router.get('/get_backpacking_trip_user_booking_details',(req,res)=>{
 });
 
 
-router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
+router.post('/post_backpacking_road_trip_user_booking_detail',(req,res)=>{
 
     const date_of_journey=new Date(req.body.date_of_journey);
     const getFullYear=parseInt(date_of_journey.getFullYear(),10);
@@ -56,33 +56,23 @@ router.post('/post_backpacking_trip_user_booking_detail',(req,res)=>{
     }));
 
 
-    const backpacking_trip_user_booking_detail=new Backpacking_Trip_User_Booking_Detail({
+    const backpacking_road_trip_user_booking_detail=new Backpacking_Road_Trip_User_Booking_Detail({
         
         _id:mongoose.Types.ObjectId(),
         user_id:req.body.user_id,
         booking_id:actual_user_booking_id,
-        name:req.body.name,
         communication_channel:req.body.communication_channel,
-        phone_number:req.body.phone_number,
-        email:req.body.email,
-        state:req.body.state,      
-        common_city:req.body.common_city,
-        travel_mode:req.body.travel_mode,
-        backpacking_trip_package_id:req.body.backpacking_trip_package_id,
+        backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id,
         date_of_journey:date_of_journey,
         group_or_solo_travel:req.body.group_or_solo_travel,
         no_of_bookings:req.body.no_of_bookings,
         total_amount_paid:req.body.total_amount_paid,
         cost_of_package:req.body.cost_of_package,
-        date_of_booking:req.body.date_of_booking,
         payment_details_id:req.body.payment_details_id,
-        razorpay_payment_id:req.body.razorpay_payment_id,
-        razorpay_order_id:req.body.razorpay_order_id,   
-        razorpay_invoice_id:req.body.razorpay_invoice_id
     });
-    backpacking_trip_user_booking_detail.extra_data_in_object_type['user_ns']=req.body.user_ns;
+    backpacking_road_trip_user_booking_detail.extra_data_in_object_type['user_ns']=req.body.user_ns;
     
-    backpacking_trip_user_booking_detail.save()
+    backpacking_road_trip_user_booking_detail.save()
     .then(result1=>{
 
         const number_nm=getDate+package_date+1;
@@ -227,7 +217,7 @@ const schedulerJobCallFunction=(date1,user_ns)=>{
         method:'GET'
     });  
 }
-
+ 
 
 
 

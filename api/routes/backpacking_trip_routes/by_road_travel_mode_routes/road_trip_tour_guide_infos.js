@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Trip_Tour_Guide_Info=require('../../models/Backpacking_Trip/backpacking_trip_tour_guide_info');
+const Backpacking_Trip_Tour_Guide_Info=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_tour_guide_info');
 
 router.get('/get_backpacking_trip_tour_guide_info',(req,res)=>{
 

@@ -1,14 +1,14 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Trip_Package_Date=require('../../models/Backpacking_Trip/backpacking_trip_package_date');
-const Backpacking_Trip_Package_Cost=require('../../models/Backpacking_Trip/backpacking_trip_package_cost');
+const Backpacking_Road_Trip_Package_Date=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_package_date');
+const Backpacking_Road_Trip_Package_Cost=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_package_cost');
 const fetch=require('node-fetch');
 
 //route for uchat
-router.get('/get_backpacking_trip_package_dates/:backpacking_trip_package_id',(req,res)=>{
+router.get('/get_backpacking_road_trip_package_dates/:backpacking_road_trip_package_id',(req,res)=>{
 
-    Backpacking_Trip_Package_Date.find({backpacking_trip_package_id:req.params.backpacking_trip_package_id})
+    Backpacking_Road_Trip_Package_Date.find({backpacking_road_trip_package_id:req.params.backpacking_road_trip_package_id})
     .exec()
     .then(result=>{
         res.json({
@@ -26,10 +26,10 @@ router.get('/get_backpacking_trip_package_dates/:backpacking_trip_package_id',(r
 
 
 //route for retool admin panel
-router.get('/get_backpacking_trip_package_dates',(req,res)=>{
-    Backpacking_Trip_Package_Date.find()
+router.get('/get_backpacking_road_trip_package_dates',(req,res)=>{
+    Backpacking_Road_Trip_Package_Date.find()
     .populate({
-            path:'backpacking_trip_package_id',
+            path:'backpacking_road_trip_package_id',
             populate:{
                 path:'backpacking_trip_travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
@@ -58,7 +58,7 @@ router.get('/get_backpacking_trip_package_dates',(req,res)=>{
 });
 
 
-router.post('/post_backpacking_trip_package_date',(req,res)=>{
+router.post('/post_backpacking_road_trip_package_date',(req,res)=>{
 
     const newDateObject=new Date(req.body.date_of_journey);
     const date_toDateString=newDateObject.toDateString();
@@ -66,10 +66,10 @@ router.post('/post_backpacking_trip_package_date',(req,res)=>{
     const getDate=parseInt(newDateObject.getDate(),10);
     const getMonth=parseInt(newDateObject.getMonth(),10);
 
-    const newData=new Backpacking_Trip_Package_Date({
+    const newData=new Backpacking_Road_Trip_Package_Date({
 
         _id:mongoose.Types.ObjectId(),
-        backpacking_trip_package_id:req.body.backpacking_trip_package_id,
+        backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id,
         date_of_journey:date_toDateString
     });
 
@@ -190,7 +190,7 @@ router.delete('/delete_date_and_cost_from_database/:package_date_id',(req,res)=>
 
     console.log('date and cost delete function');
 
-    Backpacking_Trip_Package_Date
+    Backpacking_Road_Trip_Package_Date
     .deleteOne({_id:req.params.package_date_id})
     .exec()
     .then(result=>{
@@ -200,8 +200,8 @@ router.delete('/delete_date_and_cost_from_database/:package_date_id',(req,res)=>
         console.log('date deleted successfully');
     }); 
     
-    Backpacking_Trip_Package_Cost
-    .deleteOne({backpacking_trip_package_date_id:req.params.package_date_id})
+    Backpacking_Road_Trip_Package_Cost
+    .deleteOne({backpacking_road_trip_package_date_id:req.params.package_date_id})
     .exec()
     .then(result=>{
         console.log('package cost deleted successfully');

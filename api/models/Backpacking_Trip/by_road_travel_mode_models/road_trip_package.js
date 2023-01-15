@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const backpacking_trip_package=mongoose.Schema({
+const backpacking_road_trip_package=mongoose.Schema({
     
     package_id:{type:String},
     backpacking_trip_travel_mode_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Travel_Mode'},
@@ -17,4 +17,4 @@ const backpacking_trip_package=mongoose.Schema({
 
 });
 
-module.exports=mongoose.model('Backpacking_Trip_Package',backpacking_trip_package);
+module.exports=mongoose.model('Backpacking_Road_Trip_Package',backpacking_road_trip_package);

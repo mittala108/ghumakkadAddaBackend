@@ -1,17 +1,16 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Trip_Package_Cost=require('../../models/Backpacking_Trip/backpacking_trip_package_cost');
+const Backpacking_Road_Trip_Package_Cost=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_package_cost');
 
 
-router.post('/post_backpacking_trip_package_cost',(req,res)=>{
+router.post('/post_backpacking_road_trip_package_cost',(req,res)=>{
 
-    const newData=new Backpacking_Trip_Package_Cost({
+    const newData=new Backpacking_Road_Trip_Package_Cost({
         
         _id:mongoose.Types.ObjectId(),
-        backpacking_trip_package_date_id:req.body.backpacking_trip_package_date_id,
-        date_of_journey:req.body.date_of_journey,
-        backpacking_trip_group_or_solo_travel_id:req.body.backpacking_trip_group_or_solo_travel_id,
+        backpacking_road_trip_package_date_id:req.body.backpacking_road_trip_package_date_id,
+        backpacking_road_trip_group_or_solo_travel_id:req.body.backpacking_road_trip_group_or_solo_travel_id,
         package_cost:req.body.package_cost
 
     });
@@ -32,10 +31,10 @@ router.post('/post_backpacking_trip_package_cost',(req,res)=>{
 })
 
 
-router.get('/get_backpacking_trip_packages_cost/:backpacking_trip_package_date_id/:backpacking_trip_group_or_solo_travel_id',(req,res)=>{
-    Backpacking_Trip_Package_Cost.find({
-        backpacking_trip_package_date_id:req.params.backpacking_trip_package_date_id,
-        backpacking_trip_group_or_solo_travel_id:req.params.backpacking_trip_group_or_solo_travel_id
+router.get('/get_backpacking_road_trip_packages_cost/:backpacking_road_trip_package_date_id/:backpacking_road_trip_group_or_solo_travel_id',(req,res)=>{
+    Backpacking_Road_Trip_Package_Cost.find({
+        backpacking_road_trip_package_date_id:req.params.backpacking_road_trip_package_date_id,
+        backpacking_road_trip_group_or_solo_travel_id:req.params.backpacking_road_trip_group_or_solo_travel_id
     })
     .exec()
     .then(result=>{
@@ -54,14 +53,14 @@ router.get('/get_backpacking_trip_packages_cost/:backpacking_trip_package_date_i
 });
 
 
-router.get('/get_backpacking_trip_packages_cost',(req,res)=>{
+router.get('/get_backpacking_road_trip_packages_cost',(req,res)=>{
 
     Backpacking_Trip_Package_Cost.find()
     .populate({
-        path:'backpacking_trip_package_date_id',
+        path:'backpacking_road_trip_package_date_id',
         populate:{
-            path:'backpacking_trip_package_id',
-            model:'Backpacking_Trip_Package',
+            path:'backpacking_road_trip_package_id',
+            model:'Backpacking_Road_Trip_Package',
             populate:{
                 path:'backpacking_trip_travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
@@ -77,10 +76,10 @@ router.get('/get_backpacking_trip_packages_cost',(req,res)=>{
         }
     })
     .populate({
-        path:'backpacking_trip_group_or_solo_travel_id',
+        path:'backpacking_road_trip_group_or_solo_travel_id',
         populate:{
-            path:'backpacking_trip_package_id',
-            model:'Backpacking_Trip_Package',
+            path:'backpacking_road_trip_package_id',
+            model:'Backpacking_Road_Trip_Package',
             populate:{
                 path:'backpacking_trip_travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
