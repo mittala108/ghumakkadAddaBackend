@@ -1,16 +1,16 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Road_Trip_Package_Cost=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_package_cost');
+const Package_Cost=require('../../../models/Backpacking_Trip/ByRoad/package_cost');
 
 
-router.post('/post_backpacking_road_trip_package_cost',(req,res)=>{
+router.post('/post_package_cost_fields',(req,res)=>{
 
-    const newData=new Backpacking_Road_Trip_Package_Cost({
+    const newData=new Package_Cost({
         
         _id:mongoose.Types.ObjectId(),
-        backpacking_road_trip_package_date_id:req.body.backpacking_road_trip_package_date_id,
-        backpacking_road_trip_group_or_solo_travel_id:req.body.backpacking_road_trip_group_or_solo_travel_id,
+        package_date_id:req.body.package_date_id,
+        group_or_solo_travel_id:req.body.group_or_solo_travel_id,
         package_cost:req.body.package_cost
 
     });
@@ -31,10 +31,10 @@ router.post('/post_backpacking_road_trip_package_cost',(req,res)=>{
 })
 
 
-router.get('/get_backpacking_road_trip_packages_cost/:backpacking_road_trip_package_date_id/:backpacking_road_trip_group_or_solo_travel_id',(req,res)=>{
-    Backpacking_Road_Trip_Package_Cost.find({
-        backpacking_road_trip_package_date_id:req.params.backpacking_road_trip_package_date_id,
-        backpacking_road_trip_group_or_solo_travel_id:req.params.backpacking_road_trip_group_or_solo_travel_id
+router.get('/get_packages_cost_fields/:package_date_id/:group_or_solo_travel_id',(req,res)=>{
+    Package_Cost.find({
+        package_date_id:req.params.package_date_id,
+        group_or_solo_travel_id:req.params.group_or_solo_travel_id
     })
     .exec()
     .then(result=>{
@@ -53,22 +53,22 @@ router.get('/get_backpacking_road_trip_packages_cost/:backpacking_road_trip_pack
 });
 
 
-router.get('/get_backpacking_road_trip_packages_cost',(req,res)=>{
+router.get('/get_packages_cost_fields',(req,res)=>{
 
-    Backpacking_Road_Trip_Package_Cost.find()
+    Package_Cost.find()
     .populate({
-        path:'backpacking_road_trip_package_date_id',
+        path:'package_date_id',
         populate:{
-            path:'backpacking_road_trip_package_id',
+            path:'package_ref_id',
             model:'Backpacking_Road_Trip_Package',
             populate:{
-                path:'backpacking_trip_travel_mode_id',
+                path:'travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
                 populate:{
-                    path:'backpacking_trip_common_city_id',
+                    path:'common_city_id',
                     model:'Backpacking_Trip_Common_City',
                     populate:{
-                        path:'backpacking_trip_state_id',
+                        path:'state_id',
                         model:'Backpacking_Trip_State'
                     }
                 }         
@@ -76,18 +76,18 @@ router.get('/get_backpacking_road_trip_packages_cost',(req,res)=>{
         }
     })
     .populate({
-        path:'backpacking_road_trip_group_or_solo_travel_id',
+        path:'group_or_solo_travel_id',
         populate:{
-            path:'backpacking_road_trip_package_id',
+            path:'package_ref_id',
             model:'Backpacking_Road_Trip_Package',
             populate:{
-                path:'backpacking_trip_travel_mode_id',
+                path:'travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
                 populate:{
-                    path:'backpacking_trip_common_city_id',
+                    path:'common_city_id',
                     model:'Backpacking_Trip_Common_City',
                     populate:{
-                        path:'backpacking_trip_state_id',
+                        path:'state_id',
                         model:'Backpacking_Trip_State'
                     }
                 }         

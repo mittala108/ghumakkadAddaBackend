@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const backpacking_trip_state=mongoose.Schema({
+const state=mongoose.Schema({
 
     state:{type:String},
     is_available:{type:Boolean,default:0},
@@ -9,4 +9,4 @@ const backpacking_trip_state=mongoose.Schema({
 });
 
 
-module.exports=mongoose.model('Backpacking_Trip_State',backpacking_trip_state)
+module.exports=mongoose.model('Backpacking_Trip_State',state)

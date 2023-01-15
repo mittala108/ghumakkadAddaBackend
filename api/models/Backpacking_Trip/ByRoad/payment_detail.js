@@ -1,6 +1,6 @@
 const mongoose=require('mongoose');
 
-const backpacking_road_trip_payment_detail=mongoose.Schema({
+const payment_detail=mongoose.Schema({
     
     razorpay_order_id:{type:String},
     razorpay_payment_id:{type:String},
@@ -10,4 +10,4 @@ const backpacking_road_trip_payment_detail=mongoose.Schema({
 
 });
 
-module.exports=mongoose.model('Backpacking_Road_Trip_Payment_Detail',backpacking_road_trip_payment_detail);
+module.exports=mongoose.model('Backpacking_Road_Trip_Payment_Detail',payment_detail);

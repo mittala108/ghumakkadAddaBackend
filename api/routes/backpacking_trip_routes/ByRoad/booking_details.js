@@ -1,25 +1,25 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Road_Trip_User_Booking_Detail=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_user_booking_detail');
+const Booking_Detail=require('../../../models/Backpacking_Trip/ByRoad/booking_detail');
 const fetch=require('node-fetch');
 const scheduler=require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
 var randomstring = require("randomstring");
 
-router.get('/get_backpacking_road_trip_user_booking_details',(req,res)=>{
+router.get('/get_booking_details_fields',(req,res)=>{
 
-    Backpacking_Road_Trip_User_Booking_Detail.find()
+    Booking_Detail.find()
     .populate({
-        path:'backpacking_road_trip_package_id',
+        path:'package_ref_id',
             populate:{
-                path:'backpacking_trip_travel_mode_id',
+                path:'travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
                 populate:{
-                    path:'backpacking_trip_common_city_id',
+                    path:'common_city_id',
                     model:'Backpacking_Trip_Common_City',
                     populate:{
-                        path:'backpacking_trip_state_id',
+                        path:'state_id',
                         model:'Backpacking_Trip_State'
                     }
                 }         
@@ -41,7 +41,7 @@ router.get('/get_backpacking_road_trip_user_booking_details',(req,res)=>{
 });
 
 
-router.post('/post_backpacking_road_trip_user_booking_detail',(req,res)=>{
+router.post('/post_booking_detail_fields',(req,res)=>{
 
     const date_of_journey=new Date(req.body.date_of_journey);
     const getFullYear=parseInt(date_of_journey.getFullYear(),10);
@@ -56,13 +56,13 @@ router.post('/post_backpacking_road_trip_user_booking_detail',(req,res)=>{
     }));
 
 
-    const backpacking_road_trip_user_booking_detail=new Backpacking_Road_Trip_User_Booking_Detail({
+    const booking_detail=new Booking_Detail({
         
         _id:mongoose.Types.ObjectId(),
         user_id:req.body.user_id,
         booking_id:actual_user_booking_id,
         communication_channel:req.body.communication_channel,
-        backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id,
+        package_ref_id:req.body.package_ref_id,
         date_of_journey:date_of_journey,
         group_or_solo_travel:req.body.group_or_solo_travel,
         no_of_bookings:req.body.no_of_bookings,
@@ -70,9 +70,9 @@ router.post('/post_backpacking_road_trip_user_booking_detail',(req,res)=>{
         cost_of_package:req.body.cost_of_package,
         payment_details_id:req.body.payment_details_id,
     });
-    backpacking_road_trip_user_booking_detail.extra_data_in_object_type['user_ns']=req.body.user_ns;
+    booking_detail.extra_data_in_object_type['user_ns']=req.body.user_ns;
     
-    backpacking_road_trip_user_booking_detail.save()
+    booking_detail.save()
     .then(result1=>{
 
         const number_nm=getDate+package_date+1;

@@ -1,22 +1,22 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Road_Trip_Tour_Guide_Info=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_tour_guide_info');
+const Tour_Guide_Info=require('../../../models/Backpacking_Trip/ByRoad/tour_guide_info');
 
-router.get('/get_backpacking_road_trip_tour_guide_info',(req,res)=>{
+router.get('/get_tour_guide_info_fields',(req,res)=>{
 
-    Backpacking_Road_Trip_Tour_Guide_Info.find()
+    Tour_Guide_Info.find()
     .populate(
         {
-            path:'backpacking_road_trip_package_id',
+            path:'package_ref_id',
             populate:{
-                path:'backpacking_trip_travel_mode_id',
+                path:'travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
                 populate:{
-                    path:'backpacking_trip_common_city_id',
+                    path:'common_city_id',
                     model:'Backpacking_Trip_Common_City',
                     populate:{
-                        path:'backpacking_trip_state_id',
+                        path:'state_id',
                         model:'Backpacking_Trip_State'
                     }
                 }         
@@ -37,18 +37,18 @@ router.get('/get_backpacking_road_trip_tour_guide_info',(req,res)=>{
     });
 });
 
-router.post('/add_user_booking_id_in_a_array',(req,res)=>{
+router.post('/add_booking_id_in_a_array',(req,res)=>{
 
-    Backpacking_Road_Trip_Tour_Guide_Info.find({
-        backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id
+    Tour_Guide_Info.find({
+        package_ref_id:req.body.package_ref_id
     })
     .exec()
     .then(result=>{
         const arrayLength=result[0].bookings_id_array_for_this_particular_package.length;
           result[0].bookings_id_array_for_this_particular_package[arrayLength]=req.body.booking_id;
 
-          Backpacking_Road_Trip_Tour_Guide_Info.updateOne({
-            backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id
+          Tour_Guide_Info.updateOne({
+            package_ref_id:req.body.package_ref_id
           },
           {
             bookings_id_array_for_this_particular_package:result[0].bookings_id_array_for_this_particular_package
@@ -69,23 +69,23 @@ router.post('/add_user_booking_id_in_a_array',(req,res)=>{
     });
 });
 
-router.post('/post_backpacking_road_trip_tour_guide_info',(req,res)=>{
+router.post('/post_tour_guide_info_fields',(req,res)=>{
 
-    const backpacking_road_trip_tour_guide_info= new Backpacking_Road_Trip_Tour_Guide_Info({
+    const tour_guide_info= new Tour_Guide_Info({
         _id:new mongoose.Types.ObjectId(),
         phone_number:req.body.phone_number,
         email:req.body.email,
-        backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id,
-        package_id:req.body.package_id,
+        package_ref_id:req.body.package_ref_id,
+        real_package_id:req.body.real_package_id,
         webhook_url:req.body.webhook_url,
         user_ns:req.body.user_ns,
         more_information:req.body.more_information
     });
 
-    backpacking_road_trip_tour_guide_info.save()
+    tour_guide_info.save()
     .then(result=>{
         res.json({
-            message:'backpacking_road_trip_tour_guide_info_data_saved_successfully',
+            message:'tour_guide_info_data_saved_successfully',
             data:result
         });
     })
@@ -98,9 +98,9 @@ router.post('/post_backpacking_road_trip_tour_guide_info',(req,res)=>{
 });
 
 //update
-router.post('/update_backpacking_road_trip_tour_guide_info/:user_ns',(req,res)=>{
+router.post('/update_tour_guide_info_fields/:user_ns',(req,res)=>{
 
-    Backpacking_Road_Trip_Tour_Guide_Info.find({phone_number:req.body.phone_number,email:req.body.email})
+    Tour_Guide_Info.find({phone_number:req.body.phone_number,email:req.body.email})
     .exec()
     .then(result=>{
         if(result.length==0)
@@ -111,7 +111,7 @@ router.post('/update_backpacking_road_trip_tour_guide_info/:user_ns',(req,res)=>
         }
         else
         {
-            Backpacking_Road_Trip_Tour_Guide_Info.updateOne({phone_number:req.body.phone_number,email:req.body.email},{user_ns:req.params.user_ns})
+            Tour_Guide_Info.updateOne({phone_number:req.body.phone_number,email:req.body.email},{user_ns:req.params.user_ns})
             .exec()
             .then(result1=>{
                 res.json({
@@ -129,9 +129,9 @@ router.post('/update_backpacking_road_trip_tour_guide_info/:user_ns',(req,res)=>
 });
 
 //update
-router.patch('/update_backpacking_road_trip_tour_guide_info',(req,res)=>{
+router.patch('/update_tour_guide_info_fields',(req,res)=>{
 
-    Backpacking_Road_Trip_Tour_Guide_Info.updateOne({_id:req.body.backpacking_road_trip_tour_guide_id},{
+    Tour_Guide_Info.updateOne({_id:req.body.tour_guide_id},{
         phone_number:req.body.phone_number,
         email:req.body.email,
         webhook_url:req.body.webhook_url,
@@ -152,18 +152,18 @@ router.patch('/update_backpacking_road_trip_tour_guide_info',(req,res)=>{
     });
 });
 
-router.delete('/delete_backpacking_road_trip_tour_guide_info/:backpacking_road_trip_tour_guide_info',(req,res)=>{
+router.delete('/delete_tour_guide_info_fields/:tour_guide_info',(req,res)=>{
 
-    Backpacking_Road_Trip_Tour_Guide_Info.deleteOne({_id:req.params.backpacking_road_trip_tour_guide_info})
+    Tour_Guide_Info.deleteOne({_id:req.params.tour_guide_info})
     .exec()
     .then(result=>{
         console.log('tour guide info deleted');
     });
 });
 
-router.get('/get_backpacking_road_trip_tour_guide_info/:package_id',(req,res)=>{
-    Backpacking_Road_Trip_Tour_Guide_Info.find({
-        package_id:req.params.package_id
+router.get('/get_tour_guide_info/:package_ref_id',(req,res)=>{
+    Tour_Guide_Info.find({
+        package_ref_id:req.params.package_ref_id
     })
     .exec()
     .then(result=>{
@@ -178,10 +178,10 @@ router.get('/get_backpacking_road_trip_tour_guide_info/:package_id',(req,res)=>{
     });
 });
 
-router.get('/send_data_to_backpacking_road_trip_tour_guide',(req,res)=>{
+router.get('/send_data_to_tour_guide',(req,res)=>{
     
-    Backpacking_Road_Trip_Tour_Guide_Info.find({
-        backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id
+    Tour_Guide_Info.find({
+        package_ref_id:req.body.package_ref_id
     })
     .exec()
     .then(result2=>{

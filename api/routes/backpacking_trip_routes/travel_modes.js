@@ -1,12 +1,12 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Trip_Travel_Mode=require('../../models/Backpacking_Trip/backpacking_trip_travel_mode');
+const Travel_Mode=require('../../models/Backpacking_Trip/travel_mode');
 
 //route for uchat
-router.get('/get_backpacking_trip_travel_modes/:backpacking_trip_common_city_id',(req,res)=>{
+router.get('/get_travel_modes_fields/:common_city_id',(req,res)=>{
 
-    Backpacking_Trip_Travel_Mode.find({backpacking_trip_common_city_id:req.params.backpacking_trip_common_city_id,is_available:1})
+    Travel_Mode.find({common_city_id:req.params.common_city_id,is_available:1})
     .exec()
     .then(result=>{
         res.json({
@@ -22,13 +22,13 @@ router.get('/get_backpacking_trip_travel_modes/:backpacking_trip_common_city_id'
 });
 
 //route for admin panel
-router.get('/get_backpacking_trip_travel_modes',(req,res)=>{
+router.get('/get_travel_modes_fields',(req,res)=>{
 
-    Backpacking_Trip_Travel_Mode.find()
+    Travel_Mode.find()
     .populate({
-        path:'backpacking_trip_common_city_id',
+        path:'common_city_id',
         populate:{
-            path:'backpacking_trip_state_id',
+            path:'state_id',
             model:'Backpacking_Trip_State'
         }
     })
@@ -46,14 +46,14 @@ router.get('/get_backpacking_trip_travel_modes',(req,res)=>{
 });
 
 
-router.post('/post_backpacking_trip_travel_mode',(req,res)=>{
+router.post('/post_travel_mode_fields',(req,res)=>{
 
     console.log(req.body);
 
-    const newData=new Backpacking_Trip_Travel_Mode({
+    const newData=new Travel_Mode({
         
         _id:mongoose.Types.ObjectId(),
-        backpacking_trip_common_city_id:req.body.backpacking_trip_common_city_id,
+        common_city_id:req.body.common_city_id,
         travel_mode:req.body.travel_mode
     });
 
@@ -71,9 +71,9 @@ router.post('/post_backpacking_trip_travel_mode',(req,res)=>{
     });
 });
 
-router.patch('/update_backpacking_trip_travel_mode',(req,res)=>{
+router.patch('/update_travel_mode_fields',(req,res)=>{
 
-    Backpacking_Trip_Travel_Mode.updateOne({_id:req.body.backpacking_trip_travel_mode_id},{
+    Travel_Mode.updateOne({_id:req.body.travel_mode_id},{
         travel_mode:req.body.travel_mode,
         is_available:req.body.is_available
     })
@@ -90,11 +90,6 @@ router.patch('/update_backpacking_trip_travel_mode',(req,res)=>{
         });
     });
 });
-
-
-
-
-
 
 
 module.exports=router;

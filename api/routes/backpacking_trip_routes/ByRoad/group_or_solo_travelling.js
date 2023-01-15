@@ -1,25 +1,25 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Backpacking_Road_Trip_Group_Or_Solo_Trip=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_group_or_solo_travel');
+const Group_Or_Solo_Trip=require('../../../models/Backpacking_Trip/ByRoad/group_or_solo_travel');
 
 
 
 
-router.get('/get_backpacking_road_trip_group_or_solo_travelling',(req,res)=>{
+router.get('/get_group_or_solo_travelling_fields',(req,res)=>{
 
-    Backpacking_Road_Trip_Group_Or_Solo_Trip.find()
+    Group_Or_Solo_Trip.find()
     .populate({
        
-            path:'backpacking_road_trip_package_id',
+            path:'package_ref_id',
             populate:{
-                path:'backpacking_trip_travel_mode_id',
+                path:'travel_mode_id',
                 model:'Backpacking_Trip_Travel_Mode',
                 populate:{
-                    path:'backpacking_trip_common_city_id',
+                    path:'common_city_id',
                     model:'Backpacking_Trip_Common_City',
                     populate:{
-                        path:'backpacking_trip_state_id',
+                        path:'state_id',
                         model:'Backpacking_Trip_State'
                     }
                 }         
@@ -41,9 +41,9 @@ router.get('/get_backpacking_road_trip_group_or_solo_travelling',(req,res)=>{
     });
 });
 
-router.get('/get_backpacking_road_trip_group_or_solo_travelling/:backpacking_road_trip_package_id',(req,res)=>{
+router.get('/get_group_or_solo_travelling_fields/:package_ref_id',(req,res)=>{
 
-    Backpacking_Road_Trip_Group_Or_Solo_Trip.find({backpacking_road_trip_package_id:req.params.backpacking_road_trip_package_id})
+    Group_Or_Solo_Trip.find({package_ref_id:req.params.package_ref_id})
     .exec()
     .then(result=>{
         res.json({
@@ -59,11 +59,11 @@ router.get('/get_backpacking_road_trip_group_or_solo_travelling/:backpacking_roa
 });
 
 
-router.post('/post_backpacking_road_trip_group_or_solo_travel',(req,res)=>{
+router.post('/post_group_or_solo_travel_fields',(req,res)=>{
 
-    const newData=new Backpacking_Road_Trip_Group_Or_Solo_Trip({
+    const newData=new Group_Or_Solo_Trip({
 
-        backpacking_road_trip_package_id:req.body.backpacking_road_trip_package_id,
+        package_ref_id:req.body.package_ref_id,
         travel_grouping:req.body.travel_grouping
     });
 
@@ -81,13 +81,13 @@ router.post('/post_backpacking_road_trip_group_or_solo_travel',(req,res)=>{
     });
 });
 
-router.delete('/delete_backpacking_road_trip_group_or_solo_travel/:backpacking_road_trip_group_or_solo_travel_id',(req,res)=>{
+router.delete('/delete_group_or_solo_travel_fields/:group_or_solo_travel_id',(req,res)=>{
 
-    Backpacking_Road_Trip_Group_Or_Solo_Trip.findOne({_id:req.params.backpacking_road_trip_group_or_solo_travel_id})
+    Group_Or_Solo_Trip.findOne({_id:req.params.group_or_solo_travel_id})
     .exec()
     .then(result=>{
         res.json({
-            message:'backpacking_road_trip_group_or_solo_travel data deleted'
+            message:'group_or_solo_travel data deleted'
         });
     })
     .catch(err=>{

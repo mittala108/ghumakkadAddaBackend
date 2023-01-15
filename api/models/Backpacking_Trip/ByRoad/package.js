@@ -1,9 +1,9 @@
 const mongoose=require('mongoose');
 
-const backpacking_road_trip_package=mongoose.Schema({
+const package=mongoose.Schema({
     
     package_id:{type:String},
-    backpacking_trip_travel_mode_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Travel_Mode'},
+    travel_mode_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Travel_Mode'},
     package_front_image_path:{type:String},
     package_details_web_url:{type:String},
     package_details_pdf_path:{type:String},
@@ -15,4 +15,4 @@ const backpacking_road_trip_package=mongoose.Schema({
 
 });
 
-module.exports=mongoose.model('Backpacking_Road_Trip_Package',backpacking_road_trip_package);
+module.exports=mongoose.model('Backpacking_Road_Trip_Package',package);

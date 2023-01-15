@@ -2,14 +2,14 @@ const express=require('express');
 const router=express.Router();
 const Razorpay=require('razorpay');
 const mongoose=require('mongoose');
-const Backpacking_Road_Trip_Payment_Detail=require('../../../models/Backpacking_Trip/by_road_travel_mode_models/road_trip_payment_detail');
+const Payment_Detail=require('../../../models/Backpacking_Trip/ByRoad/payment_detail');
 const fetch = require('node-fetch');
 
 var instance = new Razorpay({ key_id: 'rzp_test_nb1AYTw8yqhy68', key_secret: '3vuOI64r8EI57rPzDzxpZtbo' });
 
 
-router.get('/get_all_payment_details',(req,res)=>{
-    Backpacking_Road_Trip_Payment_Detail.find()
+router.get('/get_all_payment_details_fields',(req,res)=>{
+    Payment_Detail.find()
     .exec()
     .then(result=>{
         res.json({
@@ -32,8 +32,7 @@ router.get('/call_back_url/:user_ns',(req,res)=>{
         .then(data=>{
             if(data.status=='captured')
             {
-                console.log('jjjjjjj');
-                const newData=new Backpacking_Road_Trip_Payment_Detail({
+                const newData=new Payment_Detail({
 
                     _id:new mongoose.Types.ObjectId(),
                     razorpay_payment_id:req.query.razorpay_payment_id,

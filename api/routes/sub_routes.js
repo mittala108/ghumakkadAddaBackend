@@ -2,9 +2,9 @@ const express=require('express');
 const router=express.Router();
 
 //Backpacking_Trip
-const backpacking_trip_states=require('./backpacking_trip_routes/backpacking_trip_states');
-const backpacking_trip_common_cities=require('./backpacking_trip_routes/backpacking_trip_common_cities');
-const backpacking_trip_travel_modes=require('./backpacking_trip_routes/backpacking_trip_travel_modes');
+const backpacking_trip_states=require('./backpacking_trip_routes/states');
+const backpacking_trip_common_cities=require('./backpacking_trip_routes/common_cities');
+const backpacking_trip_travel_modes=require('./backpacking_trip_routes/travel_modes');
 const backpacking_road_trip_routes=require('./backpacking_trip_routes/backpacking_trip_subroutes');
 
 
@@ -43,9 +43,9 @@ const phone_number_verification=require('./verification_routes/phone_number_veri
 
 
 //backpacking_trip_related_routes
-router.use('/backpacking_trip_related_routes/backpacking_trip_common_cities',backpacking_trip_common_cities);
-router.use('/backpacking_trip_related_routes/backpacking_trip_states',backpacking_trip_states);
-router.use('/backpacking_trip_related_routes/backpacking_trip_travel_modes',backpacking_trip_travel_modes);
+router.use('/backpacking_trip_related_routes/common_cities',backpacking_trip_common_cities);
+router.use('/backpacking_trip_related_routes/states',backpacking_trip_states);
+router.use('/backpacking_trip_related_routes/travel_modes',backpacking_trip_travel_modes);
 router.use('/backpacking_trip_related_routes/by_road_travel_mode',backpacking_road_trip_routes);
 
 
