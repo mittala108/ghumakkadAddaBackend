@@ -55,7 +55,7 @@ router.get('/get_backpacking_road_trip_packages_cost/:backpacking_road_trip_pack
 
 router.get('/get_backpacking_road_trip_packages_cost',(req,res)=>{
 
-    Backpacking_Trip_Package_Cost.find()
+    Backpacking_Road_Trip_Package_Cost.find()
     .populate({
         path:'backpacking_road_trip_package_date_id',
         populate:{

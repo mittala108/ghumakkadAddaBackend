@@ -214,9 +214,9 @@ router.delete('/delete_date_and_cost_from_database/:package_date_id',(req,res)=>
 });
 
 
-const schedulerJobCallFunction=(date1,backpacking_trip_package_date_id)=>{
+const schedulerJobCallFunction=(date1,backpacking_road_trip_package_date_id)=>{
 
-    fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${backpacking_trip_package_date_id}`,{
+    fetch(`http://65.1.3.56:9000/schedule_jobs/delete_date_scheduler/delete_scheduler_backpacking_trip/${date1}/${backpacking_road_trip_package_date_id}`,{
         method:'GET'
     }); 
     

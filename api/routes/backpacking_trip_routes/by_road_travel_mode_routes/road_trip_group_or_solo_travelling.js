@@ -87,7 +87,7 @@ router.delete('/delete_backpacking_road_trip_group_or_solo_travel/:backpacking_r
     .exec()
     .then(result=>{
         res.json({
-            message:'backpacking_trip_group_or_solo_travel data deleted'
+            message:'backpacking_road_trip_group_or_solo_travel data deleted'
         });
     })
     .catch(err=>{
