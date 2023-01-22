@@ -3,7 +3,7 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Package_Offered_By_Tour_Guide=require('../../../models/Tour_Guide/package_offered_by_tour_guide');
 
-router.post('/post_package_offered_by_tour_guide',(req,res)=>{
+router.post('/post_package_offered_by_tour_guide_fields',(req,res)=>{
 
     const newData=new Package_Offered_By_Tour_Guide({
 
@@ -28,7 +28,7 @@ router.post('/post_package_offered_by_tour_guide',(req,res)=>{
 });
 
 
-router.get('/get_packages_offered_by_tour_guide/:tour_guide_information_id',(req,res)=>{
+router.get('/get_packages_offered_by_tour_guide_fields/:tour_guide_information_id',(req,res)=>{
 
     Package_Offered_By_Tour_Guide.find({tour_guide_information_id:req.params.tour_guide_information_id})
     .populate('package_ref_id tour_guide_information_id')

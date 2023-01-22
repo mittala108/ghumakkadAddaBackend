@@ -49,7 +49,7 @@ router.post('/post_tour_guide_information_fields',(req,res)=>{
 });
 
 //update
-router.update('/update_tour_guide_information_fields/:user_ns',(req,res)=>{
+router.patch('/update_tour_guide_information_fields/:user_ns',(req,res)=>{
 
     Tour_Guide_Information.find({phone_number:req.body.phone_number,email:req.body.email})
     .exec()

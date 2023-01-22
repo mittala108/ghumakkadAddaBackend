@@ -28,9 +28,6 @@ router.get('/check_if_user_data_is_saved_in_database',(req,res,next)=>{
             error:err
         });
     });
-    
-
-    
 });
 
 
@@ -57,6 +54,29 @@ router.post('/save_user_data_in_database',(req,res)=>{
     .catch(err=>
         {
             console.log(err)});
+});
+
+router.patch('/update_user_data',(req,res)=>{
+
+    User.updateOne({_id:req.body.user_id},{
+
+        name:req.body.name,
+        phone_number:req.body.phone_number,
+        email:req.body.email
+
+    })
+    .exec()
+    .then(result=>{
+        res.json({
+            message:'user information updated',
+            data:result
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
 });
 
 module.exports=router;

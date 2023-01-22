@@ -10,21 +10,7 @@ var randomstring = require("randomstring");
 router.get('/get_booking_details_fields',(req,res)=>{
 
     Booking_Detail.find()
-    .populate({
-        path:'package_ref_id',
-            populate:{
-                path:'travel_mode_id',
-                model:'Backpacking_Trip_Travel_Mode',
-                populate:{
-                    path:'common_city_id',
-                    model:'Backpacking_Trip_Common_City',
-                    populate:{
-                        path:'state_id',
-                        model:'Backpacking_Trip_State'
-                    }
-                }         
-            }
-    })
+    .populate('package_ref_id')
     .populate('user_id payment_details_id')
     .exec()
     .then(result=>{
@@ -62,9 +48,6 @@ router.post('/post_booking_detail_fields',(req,res)=>{
         user_id:req.body.user_id,
         booking_id:actual_booking_id,
         communication_channel:req.body.communication_channel,
-        state:req.body.state,
-        common_city:req.body.common_city,
-        travel_mode:req.body.travel_mode,
         package_ref_id:req.body.package_ref_id,
         date_of_journey:date_of_journey,
         group_or_solo_travel:req.body.group_or_solo_travel,

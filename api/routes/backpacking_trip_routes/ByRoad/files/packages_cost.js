@@ -52,6 +52,38 @@ router.get('/get_packages_cost_fields/:package_date_id/:group_or_solo_travel_id'
     });
 });
 
+router.delete('/delete_package_cost_field/:package_cost_id',(req,res)=>{
+
+    Package_Cost.deleteOne({_id:req.params.package_cost_id})
+    .exec()
+    .then(result=>{
+        res.json({
+            message:'package cost field deleted successfully'
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
+
+router.patch('/update_package_cost_field',(req,res)=>{
+
+    Package_Cost.updateOne({_id:req.body.package_cost_id},{package_cost:req.body.package_cost})
+    .exec()
+    .then(result=>{
+        res.json({
+            message:'package cost field updated succcessfully',
+            data:result
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
 
 router.get('/get_packages_cost_fields',(req,res)=>{
 
@@ -60,38 +92,14 @@ router.get('/get_packages_cost_fields',(req,res)=>{
         path:'package_date_id',
         populate:{
             path:'package_ref_id',
-            model:'Backpacking_Road_Trip_Package',
-            populate:{
-                path:'travel_mode_id',
-                model:'Backpacking_Trip_Travel_Mode',
-                populate:{
-                    path:'common_city_id',
-                    model:'Backpacking_Trip_Common_City',
-                    populate:{
-                        path:'state_id',
-                        model:'Backpacking_Trip_State'
-                    }
-                }         
-            }
+            model:'Backpacking_Road_Trip_Package'
         }
     })
     .populate({
         path:'group_or_solo_travel_id',
         populate:{
             path:'package_ref_id',
-            model:'Backpacking_Road_Trip_Package',
-            populate:{
-                path:'travel_mode_id',
-                model:'Backpacking_Trip_Travel_Mode',
-                populate:{
-                    path:'common_city_id',
-                    model:'Backpacking_Trip_Common_City',
-                    populate:{
-                        path:'state_id',
-                        model:'Backpacking_Trip_State'
-                    }
-                }         
-            }
+            model:'Backpacking_Road_Trip_Package'
         }
     })
     .exec()

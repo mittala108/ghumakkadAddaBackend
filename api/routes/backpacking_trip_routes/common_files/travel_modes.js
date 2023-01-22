@@ -45,8 +45,7 @@ router.get('/get_travel_modes_fields',(req,res)=>{
     .populate({
         path:'common_city_id',
         populate:{
-            path:'state_id',
-            model:'Backpacking_Trip_State'
+            path:'state_id'
         }
     })
     .exec()

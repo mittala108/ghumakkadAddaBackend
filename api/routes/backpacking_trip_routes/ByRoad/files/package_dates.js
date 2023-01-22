@@ -28,21 +28,7 @@ router.get('/get_package_dates_fields/:package_ref_id',(req,res)=>{
 //route for retool admin panel
 router.get('/get_package_dates_fields',(req,res)=>{
     Package_Date.find()
-    .populate({
-            path:'package_ref_id',
-            populate:{
-                path:'travel_mode_id',
-                model:'Backpacking_Trip_Travel_Mode',
-                populate:{
-                    path:'common_city_id',
-                    model:'Backpacking_Trip_Common_City',
-                    populate:{
-                        path:'state_id',
-                        model:'Backpacking_Trip_State'
-                    }
-                }         
-            }
-    })
+    .populate('package_ref_id')
     .exec()
     .then(result=>{
         res.json({
@@ -184,6 +170,15 @@ router.post('/post_package_date_fields',(req,res)=>{
         });
     });
 });
+
+router.patch('/update_package_date_field',(req,res)=>{
+
+    Package_Date
+
+
+
+
+})
 
 
 router.delete('/delete_date_and_cost_from_database/:package_date_id',(req,res)=>{

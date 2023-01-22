@@ -9,22 +9,7 @@ const Group_Or_Solo_Trip=require('../../../../models/Backpacking_Trip/ByRoad/gro
 router.get('/get_group_or_solo_travelling_fields',(req,res)=>{
 
     Group_Or_Solo_Trip.find()
-    .populate({
-       
-            path:'package_ref_id',
-            populate:{
-                path:'travel_mode_id',
-                model:'Backpacking_Trip_Travel_Mode',
-                populate:{
-                    path:'common_city_id',
-                    model:'Backpacking_Trip_Common_City',
-                    populate:{
-                        path:'state_id',
-                        model:'Backpacking_Trip_State'
-                    }
-                }         
-            }
-})
+    .populate('package_ref_id')
     .exec()
     .then(result=>{
         res.json({
@@ -97,5 +82,21 @@ router.delete('/delete_group_or_solo_travel_fields/:group_or_solo_travel_id',(re
     });
 });
 
+router.patch('/update_group_or_solo_travel_field',(req,res)=>{
+
+    Group_Or_Solo_Trip.updateOne({_id:req.body.group_or_solo_travel_id},{travel_grouping:req.body.travel_grouping})
+    .exec()
+    .then(result=>{
+        res.json({
+            message:'group or solo traval fields updated',
+            data:result
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
 
 module.exports=router;

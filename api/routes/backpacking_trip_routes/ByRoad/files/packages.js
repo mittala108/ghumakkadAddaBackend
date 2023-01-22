@@ -5,6 +5,7 @@ const Package=require('../../../../models/Backpacking_Trip/ByRoad/package');
 const multer=require('multer');
 const fs = require("fs");
 var randomstring = require("randomstring");
+const path = require('path');
 
 const storage=multer.diskStorage({
     destination:function(req,file,cb){
@@ -40,17 +41,6 @@ router.get('/get_packages_fields/:travel_mode_id',(req,res)=>{
 //route for retool admin panel
 router.get('/get_packages_fields',(req,res)=>{
     Package.find()
-    .populate({
-        path:'travel_mode_id',
-        populate:{
-            path:'common_city_id',
-            model:'Backpacking_Trip_Common_City',
-            populate:{
-                path:'state_id',
-                model:'Backpacking_Trip_State'
-            }
-        }
-    })
     .exec()
     .then(result=>{
         res.json({
@@ -80,6 +70,9 @@ router.post('/post_package_fields',upload.fields([{name:'package_front_image',ma
         _id:mongoose.Types.ObjectId(),
         package_id:actual_package_id,
         travel_mode_id:req.body.travel_mode_id,
+        travel_mode:req.body.travel_mode,
+        common_city:req.body.common_city,
+        state:req.body.state,
         package_front_image_path:req.files.package_front_image[0].path,
         package_details_web_url:req.body.package_details_web_url,
         package_details_pdf_path:req.files.package_details_pdf[0].path,
@@ -232,8 +225,8 @@ router.delete('/delete_package_image_and_pdf_file/:package_id',(req,res)=>{
     .exec()
     .then(result=>{
 
-        const imagePath=String(path.dirname(require.main.filename))+'\\'+String(result.package_front_image_path);
-        const pdfPath=String(path.dirname(require.main.filename))+'\\'+String(result.package_details_pdf_path);
+        const imagePath=String(path.dirname(require.main.filename))+'/'+String(result.package_front_image_path);
+        const pdfPath=String(path.dirname(require.main.filename))+'/'+String(result.package_details_pdf_path);
 
         fs.unlinkSync(imagePath);
         fs.unlinkSync(pdfPath);

@@ -28,18 +28,16 @@ router.post('/user_booking_details',(req,res)=>{
 });
 
 
-router.get('get_all_user_booking_details/:user_id',(req,res)=>{
+router.get('/get_all_user_booking_details/:user_id',(req,res)=>{
 
     User_Booking_Detail.find({user_id:req.params.user_id})
     .populate('user_id')
     .populate({
         path:'booking_id',
         populate:{
-            path:'package_ref_id',
-            model:'package_model'
+            path:'package_ref_id payment_details_id'
         }
     })
-    .exec
     .then(result=>{
         res.json({
             data:result,

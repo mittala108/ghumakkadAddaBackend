@@ -32,8 +32,13 @@ router.post('/post_booking_id_for_a_particular_package',(req,res)=>{
 router.get('/get_booking_ids_for_a_particular_package/:package_offered_by_tour_guide_id',(req,res)=>{
 
     Booking_Id_For_A_Particular_Package.find({package_offered_by_tour_guide_id:req.params.package_offered_by_tour_guide_id})
-    .populate('booking_id package_offered_by_tour_guide_id')
-    .exec()
+    .populate({
+        path:'booking_id',
+        populate:{
+            path:'package_ref_id user_id payment_details_id'
+        }
+    })
+    .populate('package_offered_by_tour_guide_id')
     .then(result=>{
         res.json({
             data:result,
