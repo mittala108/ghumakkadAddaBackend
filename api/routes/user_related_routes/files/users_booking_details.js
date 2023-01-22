@@ -31,11 +31,19 @@ router.post('/user_booking_details',(req,res)=>{
 router.get('get_all_user_booking_details/:user_id',(req,res)=>{
 
     User_Booking_Detail.find({user_id:req.params.user_id})
-    .populate('booking_id user_id')
+    .populate('user_id')
+    .populate({
+        path:'booking_id',
+        populate:{
+            path:'package_ref_id',
+            model:'package_model'
+        }
+    })
     .exec
     .then(result=>{
         res.json({
-            result:result
+            data:result,
+            count:result.length
         });
     })
     .catch(err=>{

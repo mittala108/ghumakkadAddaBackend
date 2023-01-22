@@ -22,6 +22,9 @@ const tour_guide_related_routes=require('./tour_guide_routes/tour_guide_subroute
 //Payment_routes
 const payment_related_routes=require('./payment_routes/payment_subroutes');
 
+//Trip_Type_Routes
+const trip_type_related_routes=require('./trip_type_routes/trip_type_subroutes');
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -45,6 +48,9 @@ router.use('/tour_guide_related_routes',tour_guide_related_routes);
 
 //payment_related_routes
 router.use('/payment_related_routes',payment_related_routes);
+
+//trip_type_related_routes
+router.use('/trip_type_related_routes',trip_type_related_routes);
 
 
 module.exports=router;

@@ -45,7 +45,6 @@ router.post('/save_user_data_in_database',(req,res)=>{
         email:req.body.email
 
     });
-    user.extra_data_in_object_type['bot_registered_id']=req.body.bot_registered_id;
     
 
     user.save()

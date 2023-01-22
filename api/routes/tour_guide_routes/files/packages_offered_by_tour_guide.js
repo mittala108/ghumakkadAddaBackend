@@ -16,7 +16,8 @@ router.post('/post_package_offered_by_tour_guide',(req,res)=>{
     newData.save()
     .then(result=>{
         res.json({
-            message:"data entered successfully"
+            message:"data entered successfully",
+            data:result
         });
     })
     .catch(err=>{
@@ -34,7 +35,8 @@ router.get('/get_packages_offered_by_tour_guide/:tour_guide_information_id',(req
     .exec()
     .then(result=>{
         res.json({
-            result:result
+            data:result,
+            count:result.length
         });
     })
     .catch(err=>{

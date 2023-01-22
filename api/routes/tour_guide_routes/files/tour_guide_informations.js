@@ -1,28 +1,11 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Tour_Guide_Info=require('../../../models/Tour_Guide/tour_guide_information');
+const Tour_Guide_Information=require('../../../models/Tour_Guide/tour_guide_information');
 
-router.get('/get_tour_guide_info_fields',(req,res)=>{
+router.get('/get_tour_guide_information_fields',(req,res)=>{
 
-    Tour_Guide_Info.find()
-    .populate(
-        {
-            path:'package_ref_id',
-            populate:{
-                path:'travel_mode_id',
-                model:'Backpacking_Trip_Travel_Mode',
-                populate:{
-                    path:'common_city_id',
-                    model:'Backpacking_Trip_Common_City',
-                    populate:{
-                        path:'state_id',
-                        model:'Backpacking_Trip_State'
-                    }
-                }         
-            }
-        }
-    )
+    Tour_Guide_Information.find()
     .exec()
     .then(result=>{
         res.json({
@@ -39,9 +22,9 @@ router.get('/get_tour_guide_info_fields',(req,res)=>{
 
 
 
-router.post('/post_tour_guide_info_fields',(req,res)=>{
+router.post('/post_tour_guide_information_fields',(req,res)=>{
 
-    const tour_guide_info= new Tour_Guide_Info({
+    const tour_guide_information= new Tour_Guide_Information({
         _id:new mongoose.Types.ObjectId(),
         name:req.body.name,
         phone_number:req.body.phone_number,
@@ -50,10 +33,10 @@ router.post('/post_tour_guide_info_fields',(req,res)=>{
         more_information:req.body.more_information
     });
 
-    tour_guide_info.save()
+    tour_guide_information.save()
     .then(result=>{
         res.json({
-            message:'tour_guide_info_data_saved_successfully',
+            message:'tour_guide_information_data_saved_successfully',
             data:result
         });
     })
@@ -66,9 +49,9 @@ router.post('/post_tour_guide_info_fields',(req,res)=>{
 });
 
 //update
-router.post('/update_tour_guide_info_fields/:user_ns',(req,res)=>{
+router.update('/update_tour_guide_information_fields/:user_ns',(req,res)=>{
 
-    Tour_Guide_Info.find({phone_number:req.body.phone_number,email:req.body.email})
+    Tour_Guide_Information.find({phone_number:req.body.phone_number,email:req.body.email})
     .exec()
     .then(result=>{
         if(result.length==0)
@@ -79,7 +62,7 @@ router.post('/update_tour_guide_info_fields/:user_ns',(req,res)=>{
         }
         else
         {
-            Tour_Guide_Info.updateOne({phone_number:req.body.phone_number,email:req.body.email},{user_ns:req.params.user_ns})
+            Tour_Guide_Information.updateOne({phone_number:req.body.phone_number,email:req.body.email},{user_ns:req.params.user_ns})
             .exec()
             .then(result1=>{
                 res.json({
@@ -97,9 +80,9 @@ router.post('/update_tour_guide_info_fields/:user_ns',(req,res)=>{
 });
 
 //update
-router.patch('/update_tour_guide_info_fields',(req,res)=>{
+router.patch('/update_tour_guide_information_fields',(req,res)=>{
 
-    Tour_Guide_Info.updateOne({_id:req.body.tour_guide_id},{
+    Tour_Guide_Information.updateOne({_id:req.body.tour_guide_id},{
         name:req.body.name,
         phone_number:req.body.phone_number,
         email:req.body.email,
@@ -121,35 +104,10 @@ router.patch('/update_tour_guide_info_fields',(req,res)=>{
     });
 });
 
-router.delete('/delete_tour_guide_info_fields/:tour_guide_info',(req,res)=>{
-
-    Tour_Guide_Info.deleteOne({_id:req.params.tour_guide_info})
-    .exec()
-    .then(result=>{
-        console.log('tour guide info deleted');
-    });
-});
-
-router.get('/get_tour_guide_info/:package_ref_id',(req,res)=>{
-    Tour_Guide_Info.find({
-        package_ref_id:req.params.package_ref_id
-    })
-    .exec()
-    .then(result=>{
-        res.json({
-            data:result
-        });
-    })
-    .catch(err=>{
-        res.json({
-            error:err
-        });
-    });
-});
 
 router.get('/send_data_to_tour_guide',(req,res)=>{
     
-    Tour_Guide_Info.find({
+    Tour_Guide_Information.find({
         package_ref_id:req.body.package_ref_id
     })
     .exec()

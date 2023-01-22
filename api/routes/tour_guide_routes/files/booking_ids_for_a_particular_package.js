@@ -17,7 +17,8 @@ router.post('/post_booking_id_for_a_particular_package',(req,res)=>{
     newData.save()
     .then(result=>{
         res.json({
-            message:'data saved successfully'
+            message:'data saved successfully',
+            data:result
         });
     })
     .catch(err=>{
@@ -35,7 +36,8 @@ router.get('/get_booking_ids_for_a_particular_package/:package_offered_by_tour_g
     .exec()
     .then(result=>{
         res.json({
-            result:result
+            data:result,
+            count:result.length
         });
     })
     .catch(err=>{
