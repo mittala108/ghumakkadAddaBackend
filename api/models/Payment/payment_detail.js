@@ -10,4 +10,4 @@ const payment_detail=mongoose.Schema({
 
 });
 
-module.exports=mongoose.model('Backpacking_Road_Trip_Payment_Detail',payment_detail);
+module.exports=mongoose.model('Payment_Detail',payment_detail);

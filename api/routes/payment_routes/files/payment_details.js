@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const Razorpay=require('razorpay');
 const mongoose=require('mongoose');
-const Payment_Detail=require('../../../models/Backpacking_Trip/ByRoad/payment_detail');
+const Payment_Detail=require('../../../models/Payment/payment_detail');
 const fetch = require('node-fetch');
 
 var instance = new Razorpay({ key_id: 'rzp_test_nb1AYTw8yqhy68', key_secret: '3vuOI64r8EI57rPzDzxpZtbo' });

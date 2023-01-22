@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const Email_Verification=require('../../models/verification/email_verification_model');
+const Email_Verification=require('../../../models/verification/email_verification_model');
 const scheduler=require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
 

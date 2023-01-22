@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Package=require('../../../models/Backpacking_Trip/ByRoad/package');
+const Package=require('../../../../models/Backpacking_Trip/ByRoad/package');
 const multer=require('multer');
 const fs = require("fs");
 var randomstring = require("randomstring");

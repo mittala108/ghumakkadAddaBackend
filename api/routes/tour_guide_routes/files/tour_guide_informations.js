@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Tour_Guide_Info=require('../../../models/Backpacking_Trip/ByRoad/tour_guide_info');
+const Tour_Guide_Info=require('../../../models/Tour_Guide/tour_guide_information');
 
 router.get('/get_tour_guide_info_fields',(req,res)=>{
 
@@ -37,46 +37,15 @@ router.get('/get_tour_guide_info_fields',(req,res)=>{
     });
 });
 
-router.post('/add_booking_id_in_a_array',(req,res)=>{
 
-    Tour_Guide_Info.find({
-        package_ref_id:req.body.package_ref_id
-    })
-    .exec()
-    .then(result=>{
-        const arrayLength=result[0].bookings_id_array_for_this_particular_package.length;
-          result[0].bookings_id_array_for_this_particular_package[arrayLength]=req.body.booking_id;
-
-          Tour_Guide_Info.updateOne({
-            package_ref_id:req.body.package_ref_id
-          },
-          {
-            bookings_id_array_for_this_particular_package:result[0].bookings_id_array_for_this_particular_package
-
-          })
-          .exec()
-          .then(data=>{
-            res.json({
-                message:'user booking id added successfully',
-                data:data
-            });
-          });       
-    })
-    .catch(err=>{
-        res.json({
-            error:err
-        });
-    });
-});
 
 router.post('/post_tour_guide_info_fields',(req,res)=>{
 
     const tour_guide_info= new Tour_Guide_Info({
         _id:new mongoose.Types.ObjectId(),
+        name:req.body.name,
         phone_number:req.body.phone_number,
         email:req.body.email,
-        package_ref_id:req.body.package_ref_id,
-        real_package_id:req.body.real_package_id,
         webhook_url:req.body.webhook_url,
         more_information:req.body.more_information
     });
@@ -131,6 +100,7 @@ router.post('/update_tour_guide_info_fields/:user_ns',(req,res)=>{
 router.patch('/update_tour_guide_info_fields',(req,res)=>{
 
     Tour_Guide_Info.updateOne({_id:req.body.tour_guide_id},{
+        name:req.body.name,
         phone_number:req.body.phone_number,
         email:req.body.email,
         webhook_url:req.body.webhook_url,

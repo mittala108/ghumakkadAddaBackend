@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Booking_Detail=require('../../../models/Backpacking_Trip/ByRoad/booking_detail');
+const Booking_Detail=require('../../../../models/Backpacking_Trip/ByRoad/booking_detail');
 const fetch=require('node-fetch');
 const scheduler=require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
@@ -69,8 +69,8 @@ router.post('/post_booking_detail_fields',(req,res)=>{
         total_amount_paid:req.body.total_amount_paid,
         cost_of_package:req.body.cost_of_package,
         payment_details_id:req.body.payment_details_id,
+        user_ns:req.body.user_ns
     });
-    booking_detail.extra_data_in_object_type['user_ns']=req.body.user_ns;
     
     booking_detail.save()
     .then(result1=>{

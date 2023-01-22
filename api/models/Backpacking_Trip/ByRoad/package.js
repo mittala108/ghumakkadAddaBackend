@@ -4,6 +4,7 @@ const package=mongoose.Schema({
     
     package_id:{type:String},
     travel_mode_id:{type:mongoose.Schema.Types.ObjectId,ref:'Backpacking_Trip_Travel_Mode'},
+    package_model_name:{type:String,default:'Backpacking_Road_Trip_Package'},
     package_front_image_path:{type:String},
     package_details_web_url:{type:String},
     package_details_pdf_path:{type:String},

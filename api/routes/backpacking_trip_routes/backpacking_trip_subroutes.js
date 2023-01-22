@@ -1,35 +1,20 @@
 const express=require('express');
 const router=express.Router();
 
-//road_trip
-const road_trip_packages=require('../backpacking_trip_routes/ByRoad/packages');
-const road_trip_group_or_solo_travelling=require('../backpacking_trip_routes/ByRoad/group_or_solo_travelling');
-const road_trip_package_dates=require('../backpacking_trip_routes/ByRoad/package_dates');
-const road_trip_packages_cost=require('../backpacking_trip_routes/ByRoad/packages_cost');
-const road_trip_payment_details=require('../backpacking_trip_routes/ByRoad/payment_details');
-const road_trip_tour_guide_infos=require('../backpacking_trip_routes/ByRoad/tour_guide_infos');
-const road_trip_booking_details=require('../backpacking_trip_routes/ByRoad/booking_details');
+
+//backpacking_trip_routes
+const states=require('./common_files/states');
+const common_cities=require('./common_files/common_cities');
+const travel_modes=require('./common_files/travel_modes');
+const backpacking_trip_road_subroutes=require('./ByRoad/backpacking_trip_road_subroutes');
 
 
 
-
-
-
-
-
-
-
-
-//road_trip
-router.use('/packages',road_trip_packages);
-router.use('/group_or_solo_travelling',road_trip_group_or_solo_travelling);
-router.use('/package_dates',road_trip_package_dates);
-router.use('/packages_cost',road_trip_packages_cost);
-router.use('/payment_details',road_trip_payment_details);
-router.use('/tour_guide_infos',road_trip_tour_guide_infos);
-router.use('/booking_details',road_trip_booking_details);
-
-
+//backpacking_trip_routes
+router.use('/states',states);
+router.use('/common_cities',common_cities);
+router.use('/travel_modes',travel_modes);
+router.use('/by_road_travel_mode',backpacking_trip_road_subroutes);
 
 
 module.exports=router;

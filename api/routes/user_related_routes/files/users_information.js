@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const User=require('../../models/user_models/user');
+const User=require('../../../models/User/user_information');
 
 
 router.get('/check_if_user_data_is_saved_in_database',(req,res,next)=>{

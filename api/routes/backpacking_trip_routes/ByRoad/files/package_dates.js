@@ -1,8 +1,8 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Package_Date=require('../../../models/Backpacking_Trip/ByRoad/package_date');
-const Package_Cost=require('../../../models/Backpacking_Trip/ByRoad/package_cost');
+const Package_Date=require('../../../../models/Backpacking_Trip/ByRoad/package_date');
+const Package_Cost=require('../../../../models/Backpacking_Trip/ByRoad/package_cost');
 const fetch=require('node-fetch');
 
 //route for uchat

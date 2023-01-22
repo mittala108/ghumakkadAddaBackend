@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const Phone_Number_Verification=require('../../models/verification/phone_number_verification_model');
+const Phone_Number_Verification=require('../../../models/verification/phone_number_verification_model');
 const scheduler=require('node-schedule');
 const { v4: uuidv4 } = require('uuid');
 

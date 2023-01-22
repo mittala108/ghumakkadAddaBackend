@@ -1,15 +1,12 @@
 const express=require('express');
 const app=express();
-const port=process.env.PORT || 7000
+const port=process.env.PORT || 8000
 const bodyParser=require('body-parser');
 const mongoose=require('mongoose');
 const cors=require('cors');
 const sub_routes=require('./api/routes/sub_routes');
 const adminRouter=require('./api/routes/admin.router');
 require('dotenv').config();
-const { v4: uuidv4 } = require('uuid');
-var randomstring = require("randomstring");
-
 
 app.set('view engine','ejs');
 
@@ -32,16 +29,11 @@ app.get('/uploads/:filename',(req,res)=>{
      return res.sendFile(__dirname+'/uploads/'+req.params.filename);
 });
 
-app.post('/experiment',(req,res)=>{
+app.get('/experiment',(req,res)=>{
 
-    const actual_user_booking_id='GA'+String(randomstring.generate({
-        length:12,
-        charset:'numeric'
-    }));
 
-    console.log(uuidv4());
-    console.log(actual_user_booking_id);
 });
+
 
 app.use('/api',sub_routes);
 app.use('/admin',adminRouter);

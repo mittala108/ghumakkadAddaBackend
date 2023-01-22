@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Group_Or_Solo_Trip=require('../../../models/Backpacking_Trip/ByRoad/group_or_solo_travel');
+const Group_Or_Solo_Trip=require('../../../../models/Backpacking_Trip/ByRoad/group_or_solo_travel');
 
 
 

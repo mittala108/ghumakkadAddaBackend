@@ -4,3 +4,31 @@
 4.sending feedback to user
 5.official accounts 
 6.
+
+
+const schedule = require('node-schedule');
+const mongoose = require('mongoose');
+
+const Schedule = mongoose.model('Schedule', {
+    cron: String,
+    callback: String
+});
+
+function scheduleJob(cron, callback) {
+    const job = schedule.scheduleJob(cron, callback);
+    const schedule = new Schedule({ cron, callback: callback.toString() });
+    schedule.save();
+    return job;
+}
+
+function rescheduleJobs() {
+    Schedule.find({}, (err, schedules) => {
+        schedules.forEach((s) => {
+            schedule.scheduleJob(s.cron, new Function('return ' + s.callback)());
+        });
+    });
+}
+
+mongoose.connect('mongodb://localhost/schedule-db');
+
+rescheduleJobs();

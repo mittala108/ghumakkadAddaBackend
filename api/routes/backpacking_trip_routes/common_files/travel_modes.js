@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Travel_Mode=require('../../models/Backpacking_Trip/travel_mode');
+const Travel_Mode=require('../../../models/Backpacking_Trip/travel_mode');
 
 //route for uchat
 router.get('/get_travel_modes_fields/:common_city_id',(req,res)=>{

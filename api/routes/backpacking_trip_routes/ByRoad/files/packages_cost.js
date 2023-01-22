@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const mongoose=require('mongoose');
-const Package_Cost=require('../../../models/Backpacking_Trip/ByRoad/package_cost');
+const Package_Cost=require('../../../../models/Backpacking_Trip/ByRoad/package_cost');
 
 
 router.post('/post_package_cost_fields',(req,res)=>{
