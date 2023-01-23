@@ -27,6 +27,30 @@ router.post('/user_booking_details',(req,res)=>{
     });
 });
 
+router.get('/get_all_user_booking_details',(req,res)=>{
+
+    User_Booking_Detail.find()
+    .populate('user_id')
+    .populate({
+        path:'booking_id',
+        populate:{
+            path:'package_ref_id payment_details_id'
+        }
+    })
+    .then(result=>{
+        res.json({
+            data:result,
+            count:result.length
+
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+});
+
 
 router.get('/get_all_user_booking_details/:user_id',(req,res)=>{
 

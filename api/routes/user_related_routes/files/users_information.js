@@ -79,4 +79,22 @@ router.patch('/update_user_data',(req,res)=>{
     });
 });
 
+router.get('/get_all_users_information',(req,res)=>{
+
+    User.find()
+    .exec()
+    .then(result=>{
+        res.json({
+            data:result,
+            count:result.length
+        });
+    })
+    .catch(err=>{
+        res.json({
+            error:err
+        });
+    });
+
+});
+
 module.exports=router;
